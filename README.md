@@ -1,2 +1,2 @@
 # PowerShell-CICD
-PowerShell Module to showcase skills involving CI/CD Pipelines, Unit Testing with Pester, PowerShell Module Development, and Recursive Backtracking Aglorithms
+PowerShell module to showcase skills involving CI/CD pipelines, unit testing with Pester, PowerShell module development, and recursive backtracking Aglorithms
