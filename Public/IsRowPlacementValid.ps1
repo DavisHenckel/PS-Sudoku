@@ -8,7 +8,7 @@
 .PARAMETER Row
     The row of the placement to attempt, this must be in the range 1-9
 .PARAMETER Number
-    The number to be tried
+    The number to be tried, must be in the range 1-9
 .EXAMPLE
     IsRowValidPlacement (Grid, 1, 1) #where 1, 1 is the row and number
 .INPUTS
