@@ -3,6 +3,8 @@
     Prints a Sudoku grid
 .DESCRIPTION
     Prints the current state of the Sudoku grid.
+.PARAMETER SudokuGrid
+    The 2D array representing the Sudoku grid.
 .EXAMPLE
     PrintGrid -Grid $SudokuGrid
 .INPUTS
