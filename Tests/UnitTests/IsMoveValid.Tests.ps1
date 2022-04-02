@@ -2,8 +2,8 @@ Describe 'IsMoveValid' {
     $SudokuGrid = GenerateEmptyGrid
     It 'Ensure all moves are valid on empty grid' {
         For($i = 1; $i -lt 10; $i++) {
-            For($j = 0; $j -lt 9; $j++) {
-                For ($k = 0; $k -lt 9; $k++) {
+            For($j = 1; $j -lt 10; $j++) {
+                For ($k = 1; $k -lt 10; $k++) {
                     IsMoveValid -SudokuGrid $SudokuGrid -Number $i -Row $j -Column $k | Should be $true
                 }
             }
