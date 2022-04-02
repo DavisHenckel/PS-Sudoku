@@ -1,3 +1,4 @@
+. ("$PSScriptRoot" + "\..\..\Public\GenerateEmptyGrid.ps1") 
 Describe 'GenerateEmptyGrid' {
     $SudokuBoard = GenerateEmptyGrid
     It 'Ensure correct data type of Sudoku grid' {
