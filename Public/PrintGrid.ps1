@@ -19,16 +19,18 @@ Function PrintGrid {
     )
     $Iterator = 1
     $RowIterator = 1
+    Write-Host "+++++++++++++++++++++++++" -ForegroundColor Green
     ForEach ($Element in $SudokuGrid) {
         if ($RowIterator % 4 -eq 0) {
-            Write-Host "------+-------+------" -ForegroundColor Green
+            Write-Host "|-------+-------+------ |" -ForegroundColor Green
             $RowIterator = 1
         }
+        Write-Host "| " -NoNewLine -ForegroundColor Green
         $RowIterator += 1
         ForEach ($Item in $Element) {
             Write-Host "$Item " -NoNewline
             if ($Iterator -eq 9) {
-                Write-Host ""
+                Write-Host "|" -ForegroundColor Green
                 $Iterator = 1
                 continue
             }
@@ -38,5 +40,5 @@ Function PrintGrid {
             $Iterator += 1
         }
     }
-    Write-Host "`n`n"
+    Write-Host "`n"
 }
