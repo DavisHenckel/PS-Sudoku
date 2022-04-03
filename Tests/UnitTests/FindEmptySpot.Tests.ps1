@@ -13,7 +13,7 @@ Describe 'FindEmptySpot' {
         $Ctr | Should be 81
     }
     It 'Should find 45 empty spots on easy grid' {
-        $EasyGrid = GenerateGrid -GridType "Easy"
+        $EasyGrid = GenerateGrid -Difficulty "Easy"
         $Ctr = 0
         $NextSpot = FindEmptySpot -SudokuGrid $EasyGrid
         while ($NextSpot) {
