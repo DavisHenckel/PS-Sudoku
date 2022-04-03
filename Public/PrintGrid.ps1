@@ -38,4 +38,5 @@ Function PrintGrid {
             $Iterator += 1
         }
     }
+    Write-Host "`n`n"
 }
