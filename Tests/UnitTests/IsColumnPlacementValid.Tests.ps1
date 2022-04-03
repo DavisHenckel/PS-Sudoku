@@ -1,5 +1,5 @@
 Describe 'IsColumnPlacementValid' {
-    $SudokuGrid = GenerateEmptyGrid
+    $SudokuGrid = GenerateGrid
     It 'Ensure empty grid has valid number placement in all columns'{
         For ($i = 0; $i -lt 9; $i++) {
             IsColumnPlacementValid $SudokuGrid ($i+1) 1 | Should be $true

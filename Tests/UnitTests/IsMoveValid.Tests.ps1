@@ -1,5 +1,5 @@
 Describe 'IsMoveValid' {
-    $SudokuGrid = GenerateEmptyGrid
+    $SudokuGrid = GenerateGrid
     It 'Ensure all moves are valid on empty grid' {
         For($i = 1; $i -lt 10; $i++) {
             For($j = 1; $j -lt 10; $j++) {

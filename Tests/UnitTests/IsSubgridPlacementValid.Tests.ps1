@@ -1,5 +1,5 @@
 Describe 'IsSubgridPlacementValid' {
-    $SudokuGrid = GenerateEmptyGrid
+    $SudokuGrid = GenerateGrid
     It 'Ensure empty grid has valid number placement in all Subgrids'{
         For ($i = 1; $i -lt 10; $i++) {
             For($j = 1; $j -lt 10; $j++) {

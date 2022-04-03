@@ -1,5 +1,5 @@
 Describe 'IsRowPlacementValid' {
-    $SudokuGrid = GenerateEmptyGrid
+    $SudokuGrid = GenerateGrid
     It 'Ensure empty grid has valid number placement in all rows'{
         For ($i = 0; $i -lt 9; $i++) {
             IsRowPlacementValid $SudokuGrid ($i+1) 1 | Should be $true
