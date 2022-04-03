@@ -11,10 +11,10 @@
 Function GenerateGrid {
     param(
         [parameter(Mandatory=$false)]
-        [ValidateSet("Empty", "Easy", "Medium", "Hard")]
-        $GridType = "Empty"
+        [ValidateSet("Empty", "Easy", "Medium", "Hard", "Insane", "Filled")]
+        $Difficulty = "Empty"
     )
-    if ($GridType -eq "Empty") {
+    if ($Difficulty -eq "Empty") {
         return [System.Array]@(
             [System.Array]@(0,0,0,0,0,0,0,0,0),
             [System.Array]@(0,0,0,0,0,0,0,0,0),
@@ -27,7 +27,7 @@ Function GenerateGrid {
             [System.Array]@(0,0,0,0,0,0,0,0,0)
         )
     }
-    if ($GridType -eq "Easy") {
+    if ($Difficulty -eq "Easy") {
         return [System.Array]@(
             [System.Array]@(0,0,4,0,5,0,0,0,0),
             [System.Array]@(9,0,0,7,3,4,6,0,0),
@@ -40,4 +40,18 @@ Function GenerateGrid {
             [System.Array]@(0,0,0,0,6,0,1,0,0)
         )
     }
+    if ($Difficulty -eq "Filled") {
+        return [System.Array]@(
+            [System.Array]@(1,1,1,1,1,1,1,1,1),
+            [System.Array]@(1,1,1,1,1,1,1,1,1),
+            [System.Array]@(1,1,1,1,1,1,1,1,1),
+            [System.Array]@(1,1,1,1,1,1,1,1,1),
+            [System.Array]@(1,1,1,1,1,1,1,1,1),
+            [System.Array]@(1,1,1,1,1,1,1,1,1),
+            [System.Array]@(1,1,1,1,1,1,1,1,1),
+            [System.Array]@(1,1,1,1,1,1,1,1,1),
+            [System.Array]@(1,1,1,1,1,1,1,1,1)
+        )
+    }
+
 }
