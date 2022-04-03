@@ -17,8 +17,6 @@ Function SolveSudoku {
         [parameter(Mandatory=$true)]
         [System.Object]$SudokuGrid,
         [parameter(Mandatory=$false)]
-        [bool]$PrintGrid = $false,
-        [parameter(Mandatory=$false)]
         [bool]$PrintSolution = $true
     )
     $EmptyMove = FindEmptySpot -SudokuGrid $SudokuGrid
@@ -35,9 +33,6 @@ Function SolveSudoku {
             $Column = $EmptyMove.Item2
             if (IsMoveValid -SudokuGrid $SudokuGrid -Row $Row -Column $Column -Number $i) {
                 $SudokuGrid[$Row-1][$Column-1] = $i
-                if ($PrintGrid) {
-                    PrintGrid -SudokuGrid $SudokuGrid
-                }
                 SolveSudoku -SudokuGrid $SudokuGrid #recurse through the grid, passsing the modified grid
             }
             else { #if the number can't be placed, remove it from the grid

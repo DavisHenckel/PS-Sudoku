@@ -40,5 +40,6 @@ Function PrintGrid {
             $Iterator += 1
         }
     }
+    Write-Host "+++++++++++++++++++++++++" -ForegroundColor Green
     Write-Host "`n"
 }
