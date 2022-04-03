@@ -11,10 +11,10 @@
 Function GenerateGrid {
     param(
         [parameter(Mandatory=$false)]
-        [ValidateSet("EmptyGrid", "EasyGrid", "MediumGrid", "HardGrid")]
-        $GridType = "EmptyGrid"
+        [ValidateSet("Empty", "Easy", "Medium", "Hard")]
+        $GridType = "Empty"
     )
-    if ($GridType -eq "EmptyGrid") {
+    if ($GridType -eq "Empty") {
         return [System.Array]@(
             [System.Array]@(0,0,0,0,0,0,0,0,0),
             [System.Array]@(0,0,0,0,0,0,0,0,0),
@@ -27,7 +27,7 @@ Function GenerateGrid {
             [System.Array]@(0,0,0,0,0,0,0,0,0)
         )
     }
-    if ($GridType -eq "EasyGrid") {
+    if ($GridType -eq "Easy") {
         return [System.Array]@(
             [System.Array]@(0,0,4,0,5,0,0,0,0),
             [System.Array]@(9,0,0,7,3,4,6,0,0),
