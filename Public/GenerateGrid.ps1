@@ -12,7 +12,7 @@ Function GenerateGrid {
     param(
         [parameter(Mandatory=$false)]
         [ValidateSet("Empty", "Easy", "Medium", "Hard", "Insane", "Filled")]
-        $Difficulty = "Empty"
+        [String]$Difficulty = "Empty"
     )
     if ($Difficulty -eq "Empty") {
         return [System.Array]@(
@@ -38,6 +38,19 @@ Function GenerateGrid {
             [System.Array]@(3,1,0,9,7,0,2,0,0),
             [System.Array]@(0,0,9,1,8,2,0,0,3),
             [System.Array]@(0,0,0,0,6,0,1,0,0)
+        )
+    }
+    if ($Difficulty -eq "Medium") {
+        return [System.Array]@(
+            [System.Array]@(0,0,0,9,0,5,0,6,0),
+            [System.Array]@(1,6,0,0,0,8,0,0,0),
+            [System.Array]@(0,0,0,0,4,0,0,1,3),
+            [System.Array]@(0,2,0,5,0,0,8,0,0),
+            [System.Array]@(7,3,9,0,8,0,0,4,5),
+            [System.Array]@(0,0,8,0,0,0,2,0,9),
+            [System.Array]@(3,0,0,0,7,0,0,2,0),
+            [System.Array]@(0,8,2,4,5,0,3,0,7),
+            [System.Array]@(9,5,0,0,0,0,0,8,0)
         )
     }
     if ($Difficulty -eq "Filled") {
