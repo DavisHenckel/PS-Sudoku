@@ -1,6 +1,6 @@
-. ("$PSScriptRoot" + "\..\..\Public\GenerateEmptyGrid.ps1") 
-Describe 'GenerateEmptyGrid' {
-    $SudokuBoard = GenerateEmptyGrid
+. ("$PSScriptRoot" + "\..\..\Public\GenerateGrid.ps1") 
+Describe 'GenerateGrid' {
+    $SudokuBoard = GenerateGrid
     It 'Ensure correct data type of Sudoku grid' {
         $SudokuBoard.GetType() | Should be System.Object[]
     }
