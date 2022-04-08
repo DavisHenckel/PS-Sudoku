@@ -24,7 +24,7 @@ Function SolveSudoku {
         if ($PrintSolution) {
             PrintGrid -SudokuGrid $SudokuGrid
         }
-        Write-Output "The Sudoku puzzle has been solved!" -ForegroundColor Green
+        Write-Host "The Sudoku puzzle has been solved!" -ForegroundColor Green
         return
     }
     else {

@@ -17,18 +17,18 @@ Function DetermineCorrectModulePath {
 $InstallPath = DetermineCorrectModulePath
 $InstallPath = $InstallPath + "\PowerShell-CICD"
 if (Test-Path $InstallPath) {
-    Write-Output "Uninstalling pre-existing module versions..." -ForegroundColor Yellow
+    Write-Host "Uninstalling pre-existing module versions..." -ForegroundColor Yellow
     Remove-Item -Recurse -Force $InstallPath
 }
-Write-Output "Installing PowerShell-CICD module version $Version`..." -ForegroundColor Green
+Write-Host "Installing PowerShell-CICD module version $Version`..." -ForegroundColor Green
 New-Item -ItemType Directory "$InstallPath\$Version" | Out-Null
 Copy-Item "$($PSScriptRoot)\*" -Exclude "*git*" -Recurse -Destination "$InstallPath\$Version"
-Write-Output "Ensuring module is properly installed..." -ForegroundColor Yellow
+Write-Host "Ensuring module is properly installed..." -ForegroundColor Yellow
 Import-Module PowerShell-CICD
 if (-not (Get-Command -Module PowerShell-CICD)){
-    Write-Output "Module not installed properly. Manually move the folder to $InstallPath`\`$Version" -ForegroundColor Red
+    Write-Host "Module not installed properly. Manually move the folder to $InstallPath`\`$Version" -ForegroundColor Red
 }
 else {
-    Write-Output "PowerShell-CICD version $Version installed successfully!" -ForegroundColor Green
+    Write-Host "PowerShell-CICD version $Version installed successfully!" -ForegroundColor Green
 }
 Pause
