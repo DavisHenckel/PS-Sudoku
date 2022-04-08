@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Test Module
+name: GitHub Actions
 
 # Controls when the workflow will run
 on:
@@ -16,7 +16,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build_and_test"
-  build_and_test:
+  Build-and-Test-Linux:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -53,7 +53,7 @@ jobs:
         shell: pwsh
         run: pwsh -command "Invoke-Build -File ./build.ps1 -Configuration 'Release' -ExportAlias"
 
-  build:
+  Build-and-Test-Windows:
     # The type of runner that the job will run on
     runs-on: windows-latest
 
