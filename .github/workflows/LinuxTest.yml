@@ -51,7 +51,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Invoke Build
         shell: pwsh
-        run: pwsh -command "Invoke-Build -File ./build.ps1 -Configuration 'Release' -ExportAlias"
+        run: pwsh -command "Invoke-Build -File ./build.ps1 -ExportAlias"
 
   Uuntu-Older:
     # The type of runner that the job will run on
@@ -88,7 +88,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Invoke Build
         shell: pwsh
-        run: pwsh -command "Invoke-Build -File ./build.ps1 -Configuration 'Release' -ExportAlias"
+        run: pwsh -command "Invoke-Build -File ./build.ps1 -ExportAlias"
 
 
   Ubuntu-Oldest:
@@ -126,4 +126,4 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Invoke Build
         shell: pwsh
-        run: pwsh -command "Invoke-Build -File ./build.ps1 -Configuration 'Release' -ExportAlias"
+        run: pwsh -command "Invoke-Build -File ./build.ps1 -ExportAlias"

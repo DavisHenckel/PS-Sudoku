@@ -24,7 +24,7 @@ task Init {
     }
 
     Write-Verbose -Message "Initializing platyPS"
-    if (-not(Get-Module -Name PowerShellGet -ListAvailable)){
+    if (-not(Get-Module -Name platyPS -ListAvailable)){
         Write-Warning "Module 'platyPS' is missing or out of date. Installing module now."
         Install-Module -Name platyPS -Scope CurrentUser -Force
     }
