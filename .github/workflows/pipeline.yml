@@ -49,6 +49,6 @@ jobs:
           Install-Module ${{ steps.psmodulecache.outputs.needed }} -ErrorAction Stop
 
       # Runs a set of commands using the runners shell
-      -name: Invoke Build
+      - name: Invoke Build
         shell: pwsh
         run: pwsh -command "Invoke-Build -File ./build.ps1 -Configuration 'Release' -ExportAlias"
