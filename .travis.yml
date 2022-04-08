@@ -1,1 +1,2 @@
 language: PowerShell
+script: Tests/RunUnitTests.ps1
