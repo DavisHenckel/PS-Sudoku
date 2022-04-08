@@ -10,22 +10,16 @@
 .INPUTS
     Takes in a Sudoku grid.
 .OUTPUTS
-    Prints the state of the puzzle on each call. Prints success message when completed and returns $true.
+    Outputs a boolean value indicating whether the Sudoku grid is solved or not.
 #>
 Function SolveSudoku {
     param (
         [parameter(Mandatory=$true)]
-        [System.Object]$SudokuGrid,
-        [parameter(Mandatory=$false)]
-        [bool]$PrintSolution = $true
+        [System.Object]$SudokuGrid
     )
     $EmptyMove = FindEmptySpot -SudokuGrid $SudokuGrid
     if (-not $EmptyMove) {
-        if ($PrintSolution) {
-            PrintGrid -SudokuGrid $SudokuGrid
-        }
-        Write-Output "The Sudoku puzzle has been solved!" -ForegroundColor Green
-        return
+        return $true #puzzle is solved
     }
     else {
         For ($i = 1; $i -lt 10; $i++) {
@@ -33,14 +27,13 @@ Function SolveSudoku {
             $Column = $EmptyMove.Item2
             if (IsMoveValid -SudokuGrid $SudokuGrid -Row $Row -Column $Column -Number $i) {
                 $SudokuGrid[$Row-1][$Column-1] = $i
-                SolveSudoku -SudokuGrid $SudokuGrid #recurse through the grid, passsing the modified grid
-            }
-            else { #if the number can't be placed, remove it from the grid
-                if (IsGameFinished -SudokuGrid $SudokuGrid) {
-                    return
+                if (SolveSudoku -SudokuGrid $SudokuGrid) { #attempt to solve the rest of the puzzle with the new number
+                    return $true
                 }
+                #if the number can't be placed because there is no solution on future calls, remove it from the grid
                 $SudokuGrid[$Row-1][$Column-1] = 0
             }
         }
+        return $false #puzzle can't be solved
     }
 }
