@@ -26,7 +26,7 @@ Copy-Item "$($PSScriptRoot)\*" -Exclude "*git*" -Recurse -Destination "$InstallP
 Write-Output "Ensuring module is properly installed..." -ForegroundColor Yellow
 Import-Module PowerShell-CICD
 if (-not (Get-Command -Module PowerShell-CICD)){
-    Write-Output "Module not installed properly. Manually move the folder to $InstallPath \ $Version" -ForegroundColor Red
+    Write-Output "Module not installed properly. Manually move the folder to $InstallPath`\`$Version" -ForegroundColor Red
 }
 else {
     Write-Output "PowerShell-CICD version $Version installed successfully!" -ForegroundColor Green
