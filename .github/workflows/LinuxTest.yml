@@ -42,7 +42,7 @@ jobs:
 
       #Install the powershell module if not found in the cache
       - name: Install required PowerShell modules
-        if: steps.cacher.outputs.cache-hit != 'true'
+        
         shell: pwsh
         run: |
           Set-PSRepository PSGallery -InstallationPolicy Trusted
@@ -79,7 +79,7 @@ jobs:
 
       #Install the powershell module if not found in the cache
       - name: Install required PowerShell modules
-        if: steps.cacher.outputs.cache-hit != 'true'
+        
         shell: pwsh
         run: |
           Set-PSRepository PSGallery -InstallationPolicy Trusted
@@ -117,7 +117,7 @@ jobs:
 
       #Install the powershell module if not found in the cache
       - name: Install required PowerShell modules
-        if: steps.cacher.outputs.cache-hit != 'true'
+        
         shell: pwsh
         run: |
           Set-PSRepository PSGallery -InstallationPolicy Trusted
