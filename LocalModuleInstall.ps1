@@ -1,8 +1,11 @@
 # Script to install the module locally. 
 # This is used prior to publishing the module to the PowerShell Gallery
-[CmdletBinding()]
-
-$StringsJSONData = Get-Content -Path ("$($PSScriptRoot)" + ".\strings.json") | ConvertFrom-Json
+Try {
+    $StringsJSONData = Get-Content -Path ("$($PSScriptRoot)" + ".\strings.json") | ConvertFrom-Json
+}
+Catch {
+    $StringsJSONData = Get-Content -Path ("$($PSScriptRoot)" + "/strings.json") | ConvertFrom-Json
+}
 $Version = $StringsJSONData."ModuleVersion"
 Function DetermineCorrectModulePath {
     $PossiblePaths = $env:PSModulePath.Split(";")
