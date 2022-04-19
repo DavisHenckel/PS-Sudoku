@@ -102,9 +102,25 @@ jobs:
           Install-Module ${{ steps.psmodulecache.outputs.needed }} -ErrorAction Stop
 
       # Runs a set of commands using the runners shell
-      - name: Invoke Build
+      - name: Setup Environment
         shell: pwsh
-        run: pwsh -command "Invoke-Build -File ./build.ps1 -ExportAlias"
+        run: ./build.ps1 "ImportModules"
+      
+      - name: Run Script Analyzer
+        shell: pwsh
+        run: ./build.ps1 "RunPSScriptAnalyzer"
+
+      - name: Run Unit Tests
+        shell: pwsh
+        run: ./build.ps1 "RunUnitTests"
+
+      - name: Run Integration Tests
+        shell: pwsh
+        run: ./build.ps1 "RunIntegrationTests"
+
+      - name: Run Acceptance Tests
+        shell: pwsh
+        run: ./build.ps1 "RunAcceptanceTests"
 
 
   Windows-2019:
@@ -140,6 +156,22 @@ jobs:
           Install-Module ${{ steps.psmodulecache.outputs.needed }} -ErrorAction Stop
 
       # Runs a set of commands using the runners shell
-      - name: Invoke Build
+      - name: Setup Environment
         shell: pwsh
-        run: pwsh -command "Invoke-Build -File ./build.ps1 -ExportAlias"
+        run: ./build.ps1 "ImportModules"
+      
+      - name: Run Script Analyzer
+        shell: pwsh
+        run: ./build.ps1 "RunPSScriptAnalyzer"
+
+      - name: Run Unit Tests
+        shell: pwsh
+        run: ./build.ps1 "RunUnitTests"
+
+      - name: Run Integration Tests
+        shell: pwsh
+        run: ./build.ps1 "RunIntegrationTests"
+
+      - name: Run Acceptance Tests
+        shell: pwsh
+        run: ./build.ps1 "RunAcceptanceTests"
