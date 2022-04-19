@@ -33,11 +33,12 @@ function Init {
 function Test {
     try {
         Write-Verbose -Message "Running PSScriptAnalyzer on Public functions"
-        Invoke-ScriptAnalyzer ".\Source\Public" -Recurse
+        Invoke-ScriptAnalyzer ".\Public" -Recurse
         Write-Verbose -Message "Running PSScriptAnalyzer on Private functions"
-        Invoke-ScriptAnalyzer ".\Source\Private" -Recurse
+        Invoke-ScriptAnalyzer ".\Private" -Recurse
     }
     catch {
+        Write-Error $_
         throw "Couldn't run Script Analyzer"
     }
 
