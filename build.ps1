@@ -74,4 +74,4 @@ Function RunAcceptanceTests {
     }
 }
 
-$FunctionToRun
+Invoke-Expression $FunctionToRun
