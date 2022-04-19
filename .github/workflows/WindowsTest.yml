@@ -49,9 +49,25 @@ jobs:
           Install-Module ${{ steps.psmodulecache.outputs.needed }} -ErrorAction Stop
 
       # Runs a set of commands using the runners shell
-      - name: Invoke Build
+      - name: Setup Environment
         shell: pwsh
-        run: pwsh -command "./build.ps1"
+        run: ./build.ps1
+      
+      - name: Run Script Analyzer
+        shell: pwsh
+        run: RunPSScriptAnalyzer
+
+      - name: Run Unit Tests
+        shell: pwsh
+        run: RunUnitTests
+
+      - name: Run Integration Tests
+        shell: pwsh
+        run: RunIntegrationTests
+
+      - name: Run Acceptance Tests
+        shell: pwsh
+        run: RunAcceptanceTests
 
   Windows-2022:
     # The type of runner that the job will run on
