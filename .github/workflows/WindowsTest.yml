@@ -51,23 +51,23 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Setup Environment
         shell: pwsh
-        run: ./build.ps1
+        run: ./build.ps1 "ImportModules"
       
       - name: Run Script Analyzer
         shell: pwsh
-        run: RunPSScriptAnalyzer
+        run: ./build.ps1 "RunPSScriptAnalyzer"
 
       - name: Run Unit Tests
         shell: pwsh
-        run: RunUnitTests
+        run: ./build.ps1 "RunUnitTests"
 
       - name: Run Integration Tests
         shell: pwsh
-        run: RunIntegrationTests
+        run: ./build.ps1 "RunIntegrationTests"
 
       - name: Run Acceptance Tests
         shell: pwsh
-        run: RunAcceptanceTests
+        run: ./build.ps1 "RunAcceptanceTests"
 
   Windows-2022:
     # The type of runner that the job will run on

@@ -1,7 +1,9 @@
 param (
-    [ValidateSet("Release", "debug")]$Configuration = "debug",
-    [Parameter(Mandatory=$false)][String]$NugetAPIKey,
-    [Parameter(Mandatory=$false)][Switch]$ExportAlias
+    [parameter(Mandatory=$true)]
+    [ValidateSet("ImportModules", "RunPSScriptAnalyzer", "RunUnitTests", "RunIntegrationTests", "RunAcceptanceTests")]
+    [string]$FunctionToRun
+    # [Parameter(Mandatory=$false)][String]$NugetAPIKey,
+    # [Parameter(Mandatory=$false)][Switch]$ExportAlias
 )
 
 function ImportModules {
@@ -72,4 +74,4 @@ Function RunAcceptanceTests {
     }
 }
 
-ImportModules
+$FunctionToRun
