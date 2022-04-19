@@ -25,7 +25,7 @@ Function PrintGrid {
             Write-Host "|-------+-------+------ |" -ForegroundColor Green
             $RowIterator = 1
         }
-        Write-Host "| " -NoNewLine -ForegroundColor Green
+        Write-Host "| " -ForegroundColor Green -NoNewline
         $RowIterator += 1
         ForEach ($Item in $Element) {
             Write-Host "$Item " -NoNewline
@@ -35,11 +35,10 @@ Function PrintGrid {
                 continue
             }
             if ($Iterator % 3 -eq 0) {
-                Write-Host "| " -ForegroundColor Green -NoNewline
+                Write-Host "| " -NoNewline -ForegroundColor Green
             }
             $Iterator += 1
         }
     }
-    Write-Host "+++++++++++++++++++++++++" -ForegroundColor Green
-    Write-Host "`n"
+    Write-Host "+++++++++++++++++++++++++`n" -ForegroundColor Green
 }
