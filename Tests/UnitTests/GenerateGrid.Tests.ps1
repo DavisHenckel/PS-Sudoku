@@ -1,15 +1,17 @@
 . ("$PSScriptRoot" + "\..\..\Public\GenerateGrid.ps1") 
 Describe 'GenerateGrid' {
-    $SudokuBoard = GenerateGrid
+    BeforeAll{
+        $SudokuBoard = GenerateGrid
+    }
     It 'Ensure correct data type of Sudoku grid' {
-        $SudokuBoard.GetType() | Should be System.Object[]
+        $SudokuBoard.GetType() | should -be System.Object[]
     }
     It 'Ensure correct number of lines on Sudoku grid' {
-        $SudokuBoard.Length | Should be 9
+        $SudokuBoard.Length | should -be 9
     }
     It 'Ensure correct items per line in Sudoku grid' {
         ForEach ($Line in $SudokuBoard) {
-            $Line.Length | Should be 9
+            $Line.Length | should -be 9
             ForEach ($Item in $Line) {
                 $NumCountedElements += 1
             }
@@ -21,6 +23,6 @@ Describe 'GenerateGrid' {
                 $NumCountedElements += 1
             }
         }
-        $NumCountedElements | Should be 81
+        $NumCountedElements | should -be 81
     }
 }

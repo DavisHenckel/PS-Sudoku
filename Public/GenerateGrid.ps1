@@ -1,58 +1,40 @@
 <#
 .SYNOPSIS
-    Generates an Empty 2D Arraylist
+    Generates a 2D Arraylist that represents the Sudoku board.
 .DESCRIPTION
-    Generates an Empty 2D Arraylist that will be used for the Sudoku Board
+    By Default, will generate an Empty 2D array that will be used for the Sudoku Board. Allows for optional parameters that will give the user the ability to generate a Sudoku Board with a specific difficulty.
+.PARAMETER Difficulty
+    The difficulty of the Sudoku Board. This must be in the set "Filled", "Empty", "Easy", "Medium", "Hard", "Expert", or "Insane" where easy-insane is 37,30,23,20,17 number of clues respectively
+    Empty is the default and will generate an empty board of all 0s.
 .EXAMPLE
     $SudokuBoard = GenerateGrid
+.EXAMPLE
+    $SudokuBoard = GenerateGrid -Difficulty "Easy" #will provide 37 random clues
+.EXAMPLE 
+    $SudokuBoard = GenerateGrid -Difficulty "Medium" #will provide 30 random clues
+.EXAMPLE 
+    $SudokuBoard = GenerateGrid -Difficulty "Hard" #will provide 23 random clues
+.EXAMPLE 
+    $SudokuBoard = GenerateGrid -Difficulty "Expert" #will provide 20 random clues
+.EXAMPLE 
+    $SudokuBoard = GenerateGrid -Difficulty "Insane" #will provide 17 random clues
 .OUTPUTS
-    Returns a 2D arraylist
+    Returns a 2D array that is the Sudoku Board. 
 #>
+
+$DIFFICULTYCLUES = @{
+    "Easy" = 37;
+    "Medium" = 30;
+    "Hard" = 23;
+    "Expert" = 20;
+    "Insane" = 17;
+}
 Function GenerateGrid {
     param(
         [parameter(Mandatory=$false)]
-        [ValidateSet("Empty", "Easy", "Medium", "Hard", "Insane", "Filled")]
+        [ValidateSet("Empty", "Easy", "Medium", "Hard", "Expert", "Insane", "Filled")]
         [String]$Difficulty = "Empty"
     )
-    if ($Difficulty -eq "Empty") {
-        return [System.Array]@(
-            [System.Array]@(0,0,0,0,0,0,0,0,0),
-            [System.Array]@(0,0,0,0,0,0,0,0,0),
-            [System.Array]@(0,0,0,0,0,0,0,0,0),
-            [System.Array]@(0,0,0,0,0,0,0,0,0),
-            [System.Array]@(0,0,0,0,0,0,0,0,0),
-            [System.Array]@(0,0,0,0,0,0,0,0,0),
-            [System.Array]@(0,0,0,0,0,0,0,0,0),
-            [System.Array]@(0,0,0,0,0,0,0,0,0),
-            [System.Array]@(0,0,0,0,0,0,0,0,0)
-        )
-    }
-    if ($Difficulty -eq "Easy") {
-        return [System.Array]@(
-            [System.Array]@(0,0,4,0,5,0,0,0,0),
-            [System.Array]@(9,0,0,7,3,4,6,0,0),
-            [System.Array]@(0,0,3,0,2,1,0,4,9),
-            [System.Array]@(0,3,5,0,9,0,4,8,0),
-            [System.Array]@(0,9,0,0,0,0,0,3,0),
-            [System.Array]@(0,7,6,0,1,0,9,2,0),
-            [System.Array]@(3,1,0,9,7,0,2,0,0),
-            [System.Array]@(0,0,9,1,8,2,0,0,3),
-            [System.Array]@(0,0,0,0,6,0,1,0,0)
-        )
-    }
-    if ($Difficulty -eq "Medium") {
-        return [System.Array]@(
-            [System.Array]@(0,0,0,9,0,5,0,6,0),
-            [System.Array]@(1,6,0,0,0,8,0,0,0),
-            [System.Array]@(0,0,0,0,4,0,0,1,3),
-            [System.Array]@(0,2,0,5,0,0,8,0,0),
-            [System.Array]@(7,3,9,0,8,0,0,4,5),
-            [System.Array]@(0,0,8,0,0,0,2,0,9),
-            [System.Array]@(3,0,0,0,7,0,0,2,0),
-            [System.Array]@(0,8,2,4,5,0,3,0,7),
-            [System.Array]@(9,5,0,0,0,0,0,8,0)
-        )
-    }
     if ($Difficulty -eq "Filled") {
         return [System.Array]@(
             [System.Array]@(1,1,1,1,1,1,1,1,1),
@@ -66,5 +48,19 @@ Function GenerateGrid {
             [System.Array]@(1,1,1,1,1,1,1,1,1)
         )
     }
-
+    $StarterArr = [System.Array]@(
+        [System.Array]@(0,0,0,0,0,0,0,0,0),
+        [System.Array]@(0,0,0,0,0,0,0,0,0),
+        [System.Array]@(0,0,0,0,0,0,0,0,0),
+        [System.Array]@(0,0,0,0,0,0,0,0,0),
+        [System.Array]@(0,0,0,0,0,0,0,0,0),
+        [System.Array]@(0,0,0,0,0,0,0,0,0),
+        [System.Array]@(0,0,0,0,0,0,0,0,0),
+        [System.Array]@(0,0,0,0,0,0,0,0,0),
+        [System.Array]@(0,0,0,0,0,0,0,0,0)
+    )
+    if ($Difficulty -eq "Empty") {
+        return $StarterArr
+    }
+    return FindValidSudokuGrid -Grid $StarterArr -NumClues $DIFFICULTYCLUES.$Difficulty
 }
