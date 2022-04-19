@@ -51,7 +51,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Invoke Build
         shell: pwsh
-        run: pwsh -command "Invoke-Build -File ./build.ps1 -ExportAlias"
+        run: pwsh -command "./build.ps1"
 
   Windows-2022:
     # The type of runner that the job will run on
