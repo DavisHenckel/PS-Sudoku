@@ -1,3 +1,11 @@
+$DIFFICULTYCLUES = @{
+    "Easy" = 37;
+    "Medium" = 30;
+    "Hard" = 23;
+    "Expert" = 20;
+    "Insane" = 17;
+}
+
 <#
 .SYNOPSIS
     Generates a 2D Arraylist that represents the Sudoku board.
@@ -21,14 +29,6 @@
 .OUTPUTS
     Returns a 2D array that is the Sudoku Board. 
 #>
-
-$DIFFICULTYCLUES = @{
-    "Easy" = 37;
-    "Medium" = 30;
-    "Hard" = 23;
-    "Expert" = 20;
-    "Insane" = 17;
-}
 Function GenerateGrid {
     param(
         [parameter(Mandatory=$false)]
