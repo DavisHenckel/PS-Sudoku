@@ -13,7 +13,7 @@ Solves a Sudoku puzzle
 ## SYNTAX
 
 ```
-SolveSudoku [-SudokuGrid] <Object> [[-PrintSolution] <Boolean>] [<CommonParameters>]
+SolveSudoku [-SudokuGrid] <Object> [[-WatchAlg] <Boolean>] [[-StopWatch] <Object>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,8 +43,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -PrintSolution
-{{ Fill PrintSolution Description }}
+### -WatchAlg
+A boolean to indicate whether to use print statements at each call to watch the algorithm in action.
 
 ```yaml
 Type: Boolean
@@ -53,7 +53,24 @@ Aliases:
 
 Required: False
 Position: 2
-Default value: True
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -StopWatch
+A timer that tracks how long the algorithm has been running.
+If it takes longer than 60 seconds, return false and retry.
+TODO to fix this if possible.
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -66,7 +83,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### Takes in a Sudoku grid.
 ## OUTPUTS
 
-### Prints the state of the puzzle on each call. Prints success message when completed and returns $true.
+### Outputs a boolean value indicating whether the Sudoku grid is solved or not.
 ## NOTES
 
 ## RELATED LINKS

@@ -1,10 +1,12 @@
 param (
-    [ValidateSet("Release", "debug")]$Configuration = "debug",
-    [Parameter(Mandatory=$false)][String]$NugetAPIKey,
-    [Parameter(Mandatory=$false)][Switch]$ExportAlias
+    [parameter(Mandatory=$true)]
+    [ValidateSet("ImportModules", "RunPSScriptAnalyzer", "RunUnitTests", "RunIntegrationTests", "RunAcceptanceTests")]
+    [string]$FunctionToRun
+    # [Parameter(Mandatory=$false)][String]$NugetAPIKey,
+    # [Parameter(Mandatory=$false)][Switch]$ExportAlias
 )
 
-task Init {
+function ImportModules {
     Write-Verbose -Message "Initializing Module PSScriptAnalyzer"
     if (-not(Get-Module -Name PSScriptAnalyzer -ListAvailable)){
         Write-Warning "Module 'PSScriptAnalyzer' is missing or out of date. Installing module now."
@@ -28,22 +30,48 @@ task Init {
         Write-Warning "Module 'platyPS' is missing or out of date. Installing module now."
         Install-Module -Name platyPS -Scope CurrentUser -Force
     }
+    Write-Verbose -Message "Initializing PowerShell-CICD"
+    if (-not(Get-Module -Name PowerShell-CICD -ListAvailable)){
+        Write-Warning "Module 'PowerShell-CICD' is missing or out of date. Installing module now."
+        .\LocalModuleInstall.ps1
+    }
 }
 
-task Test {
+function RunPSScriptAnalyzer {
     try {
         Write-Verbose -Message "Running PSScriptAnalyzer on Public functions"
-        Invoke-ScriptAnalyzer ".\Source\Public" -Recurse
+        Invoke-ScriptAnalyzer ".\Public" -Recurse
         Write-Verbose -Message "Running PSScriptAnalyzer on Private functions"
-        Invoke-ScriptAnalyzer ".\Source\Private" -Recurse
+        Invoke-ScriptAnalyzer ".\Private" -Recurse
     }
     catch {
+        Write-Error $_
         throw "Couldn't run Script Analyzer"
     }
+}
 
-    Write-Verbose -Message "Running Pester Tests"
-    $Results = Invoke-Pester -Script ".\Tests\UnitTests\*.ps1" -OutputFormat NUnitXml -OutputFile ".\Tests\UnitTests\TestResults.xml"
+Function RunUnitTests {
+    Write-Verbose -Message "Running Pester Unit Tests"
+    $Results = Invoke-Pester -Script ".\Tests\UnitTests\*.ps1" -OutputFormat NUnitXml -OutputFile ".\Tests\UnitTests\UnitTestsResults.xml"
     if($Results.FailedCount -gt 0){
         throw "$($Results.FailedCount) Tests failed"
     }
 }
+
+Function RunIntegrationTests {
+    Write-Verbose -Message "Running Pester Integration Tests"
+    $Results = Invoke-Pester -Script ".\Tests\IntegrationTests\*.ps1" -OutputFormat NUnitXml -OutputFile ".\Tests\IntegrationTestsResults.xml"
+    if($Results.FailedCount -gt 0){
+        throw "$($Results.FailedCount) Tests failed"
+    }
+}
+
+Function RunAcceptanceTests {
+    Write-Verbose -Message "Running Pester Acceptance Tests"
+    $Results = Invoke-Pester -Script ".\Tests\AcceptanceTests\*.ps1" -OutputFormat NUnitXml -OutputFile ".\Tests\AcceptanceTestsResults.xml"
+    if($Results.FailedCount -gt 0){
+        throw "$($Results.FailedCount) Tests failed"
+    }
+}
+
+Invoke-Expression $FunctionToRun

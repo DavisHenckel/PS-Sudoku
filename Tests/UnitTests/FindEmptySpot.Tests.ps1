@@ -10,7 +10,7 @@ Describe 'FindEmptySpot' {
                 }
             }
         }
-        $Ctr | Should be 81
+        $Ctr | should -be 81
     }
     It 'Should find 45 empty spots on easy grid' {
         $EasyGrid = GenerateGrid -Difficulty "Easy"
@@ -21,6 +21,6 @@ Describe 'FindEmptySpot' {
             $EasyGrid[$NextSpot.Item1 - 1][$NextSpot.Item2 - 1] = 1
             $NextSpot = FindEmptySpot -SudokuGrid $EasyGrid
         }
-        $Ctr | Should be 45
+        $Ctr | should -be 44
     }
 }
