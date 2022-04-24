@@ -1,3 +1,7 @@
+Function DetermineCorrectModulePath {
+    $PossiblePaths = $env:PSModulePath.Split(";")
+    return $PossiblePaths[0]
+}
 # Script to install the module locally. 
 # This is used prior to publishing the module to the PowerShell Gallery
 Try {
@@ -7,20 +11,12 @@ Catch {
     $StringsJSONData = Get-Content -Path ("$($PSScriptRoot)" + "/strings.json") | ConvertFrom-Json
 }
 $Version = $StringsJSONData."ModuleVersion"
-Function DetermineCorrectModulePath {
-    $PossiblePaths = $env:PSModulePath.Split(";")
-    ForEach ($Path in $PossiblePaths) {
-        if ($Path -match "Program Files") {
-            return $Path
-        }
-    }
-    return $PossiblePaths[0] #if only 1 path and not programfiles.
-}
+
 $InstallPath = $null
 if ($IsWindows) {
     $InstallPath = "C:\Users\runneradmin\Documents\PowerShell\Modules\PowerShell-CICD"
 }
-elseif ($IsLinux) {
+if ($IsLinux) {
     $InstallPath = "/home/runner/.local/share/powershell/Modules/PowerShell-CICD"
 }
 elseif ($IsMacOS) {
@@ -28,6 +24,7 @@ elseif ($IsMacOS) {
 }
 else {
     $InstallPath = DetermineCorrectModulePath
+    $InstallPath = $InstallPath + "\PowerShell-CICD"
 }
 if (Test-Path $InstallPath) {
     Write-Host "Uninstalling pre-existing module versions..." -ForegroundColor Yellow
