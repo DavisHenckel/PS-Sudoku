@@ -33,7 +33,6 @@ Function SolveSudoku {
     if ($WatchAlgorithm) {
         $EmptyMove = FindEmptySpot -SudokuGrid $SudokuGrid
         if (-not $EmptyMove) {
-            Write-Host (PrintGrid -SudokuGrid $SudokuGrid)
             return $true #puzzle is solved   
         }
         $Row = $EmptyMove.Item1

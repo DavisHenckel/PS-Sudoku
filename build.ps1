@@ -52,7 +52,7 @@ function RunPSScriptAnalyzer {
 
 Function RunUnitTests {
     Write-Verbose -Message "Running Pester Unit Tests"
-    $Results = Invoke-Pester -Script ".\Tests\UnitTests\*.ps1" -Output Detailed  -OutputFormat NUnitXml -OutputFile ".\Tests\UnitTests\UnitTestsResults.xml"
+    $Results = Invoke-Pester -Script ".\Tests\UnitTests\*.ps1" -Output Detailed -OutputFormat NUnitXml -OutputFile ".\Tests\UnitTests\UnitTestsResults.xml"
     if($Results.FailedCount -gt 0){
         throw "$($Results.FailedCount) Tests failed"
     }
@@ -60,7 +60,7 @@ Function RunUnitTests {
 
 Function RunIntegrationTests {
     Write-Verbose -Message "Running Pester Integration Tests"
-    $Results = Invoke-Pester -Script ".\Tests\IntegrationTests\*.ps1" -Output Detailed  -OutputFormat NUnitXml -OutputFile ".\Tests\IntegrationTestsResults.xml"
+    $Results = Invoke-Pester -Script ".\Tests\IntegrationTests\*.ps1" -Output Detailed -OutputFormat NUnitXml -OutputFile ".\Tests\IntegrationTestsResults.xml"
     if($Results.FailedCount -gt 0){
         throw "$($Results.FailedCount) Tests failed"
     }
