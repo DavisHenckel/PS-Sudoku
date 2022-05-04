@@ -40,7 +40,7 @@ Function FindValidSudokuGrid {
                 $Grid = DeepCopyArray $ReturnGrid #re-copy the current state of the return grid to the grid
             }
         }
-        # Stopwatch to track the length of time. TODO if I can figure out what randomly makes recursion take so long.
+        # Stopwatch to track the length of time. I don't want grid generation to take too long.
         $stopwatch =  [system.diagnostics.stopwatch]::StartNew()
         #If this grid has a valid solution return the grid
         if (SolveSudoku -SudokuGrid $Grid -StopWatch $stopwatch) {

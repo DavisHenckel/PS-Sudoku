@@ -32,37 +32,16 @@ Function IsSubgridPlacementValid {
         [ValidateRange(1, 9)]
         [int32]$Number
     )
-    switch (CalculateSubgridNumber -Row $Row -Column $Column) {
-        0{
-            return NumberInSubgrid -XRangeLower 0 -XRangeUpper 3 -YRangeLower 0 -YRangeUpper 3 -SudokuGrid $SudokuGrid -Number $Number
-        }
-        1{
-            return NumberInSubgrid -XRangeLower 0 -XRangeUpper 3 -YRangeLower 3 -YRangeUpper 6 -SudokuGrid $SudokuGrid -Number $Number
-        }
-        2{
-            return NumberInSubgrid -XRangeLower 0 -XRangeUpper 3 -YRangeLower 6 -YRangeUpper 9 -SudokuGrid $SudokuGrid -Number $Number
-        }
-        3{
-            return NumberInSubgrid -XRangeLower 3 -XRangeUpper 6 -YRangeLower 0 -YRangeUpper 3 -SudokuGrid $SudokuGrid -Number $Number
-        }
-        4{
-            return NumberInSubgrid -XRangeLower 3 -XRangeUpper 6 -YRangeLower 3 -YRangeUpper 6 -SudokuGrid $SudokuGrid -Number $Number
-        }
-        5{
-            return NumberInSubgrid -XRangeLower 3 -XRangeUpper 6 -YRangeLower 6 -YRangeUpper 9 -SudokuGrid $SudokuGrid -Number $Number
-        }
-        6{
-            return NumberInSubgrid -XRangeLower 6 -XRangeUpper 9 -YRangeLower 0 -YRangeUpper 3 -SudokuGrid $SudokuGrid -Number $Number
-        }
-        7{
-            return NumberInSubgrid -XRangeLower 6 -XRangeUpper 9 -YRangeLower 3 -YRangeUpper 6 -SudokuGrid $SudokuGrid -Number $Number
-        }
-        8{
-            return NumberInSubgrid -XRangeLower 6 -XRangeUpper 9 -YRangeLower 6 -YRangeUpper 9 -SudokuGrid $SudokuGrid -Number $Number
-        }
-        default {
-            Write-Error "Invalid subgrid"
-            Return $null
+    $CalcRow = $Row - 1
+    $CalcCol = $Column - 1 
+    [int32]$SubgridRowStart = [Math]::Floor(($CalcRow / 3)) * 3 
+    [int32]$SubgridColumnStart = [Math]::Floor(($CalcCol / 3)) * 3
+    for ($i = $SubgridRowStart; $i -lt $SubgridRowStart + 3; $i++) {
+        for ($j = $SubgridColumnStart; $j -lt $SubgridColumnStart + 3; $j++) {
+            if ($SudokuGrid[($i)][($j)] -eq $Number) {
+                return $false
+            }
         }
     }
+    return $true
 }

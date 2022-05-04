@@ -32,7 +32,7 @@ $DIFFICULTYCLUES = @{
 Function GenerateGrid {
     param(
         [parameter(Mandatory=$false)]
-        [ValidateSet("Empty", "Easy", "Medium", "Hard", "Expert", "Insane", "Filled")]
+        [ValidateSet("Empty", "Easy", "Medium", "Hard", "Expert", "Insane", "Filled", "UniqueSolution")]
         [String]$Difficulty = "Empty"
     )
     if ($Difficulty -eq "Filled") {
@@ -59,6 +59,19 @@ Function GenerateGrid {
         [System.Array]@(0,0,0,0,0,0,0,0,0),
         [System.Array]@(0,0,0,0,0,0,0,0,0)
     )
+    if ($Difficulty -eq "UniqueSolution") {
+        return [System.Array]@(
+            [System.Array]@(0,0,0,8,0,1,0,0,0),
+            [System.Array]@(0,0,0,0,0,0,0,4,3),
+            [System.Array]@(5,0,0,0,0,0,0,0,0),
+            [System.Array]@(0,0,0,0,7,0,8,0,0),
+            [System.Array]@(0,0,0,0,0,0,1,0,0),
+            [System.Array]@(0,2,0,0,3,0,0,0,0),
+            [System.Array]@(6,0,0,0,0,0,0,7,5),
+            [System.Array]@(0,0,3,4,0,0,0,0,0),
+            [System.Array]@(0,0,0,2,0,0,6,0,0)
+        )
+    }
     if ($Difficulty -eq "Empty") {
         return $StarterArr
     }
