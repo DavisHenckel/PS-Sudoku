@@ -30,9 +30,9 @@ function ImportModules {
         Write-Warning "Module 'platyPS' is missing or out of date. Installing module now."
         Install-Module -Name platyPS -Scope CurrentUser -Force
     }
-    Write-Verbose -Message "Initializing PowerShell-CICD"
-    if (-not(Get-Module -Name PowerShell-CICD -ListAvailable)){
-        Write-Warning "Module 'PowerShell-CICD' is missing or out of date. Installing module now."
+    Write-Verbose -Message "Initializing PS-Sudoku"
+    if (-not(Get-Module -Name PS-Sudoku -ListAvailable)){
+        Write-Warning "Module 'PS-Sudoku' is missing or out of date. Installing module now."
         .\LocalModuleInstall.ps1
     }
 }

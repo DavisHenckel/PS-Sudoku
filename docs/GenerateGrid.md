@@ -1,6 +1,6 @@
 ---
-external help file: PowerShell-CICD-help.xml
-Module Name: PowerShell-CICD
+external help file: PS-Sudoku-help.xml
+Module Name: PS-Sudoku
 online version:
 schema: 2.0.0
 ---
