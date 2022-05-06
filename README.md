@@ -10,7 +10,7 @@ PowerShell module to showcase skills involving CI/CD pipelines, Testing with Pes
 | GitHub Actions | Ubuntu(v18 - Current) | ![Build Status](https://github.com/DavisHenckel/Powershell-CICD/actions/workflows/LinuxProd.yml/badge.svg) |  
 | GitHub Actions | MacOS(v10 - Current) | ![Build Status](https://github.com/DavisHenckel/Powershell-CICD/actions/workflows/MacOSProd.yml/badge.svg)
 
-## Build Status - Development Branch
+### Build Status - Development Branch
 | CI System | Environment | Job Name & Status |
 | :--- | :--- | :--- |
 | GitHub Actions | Windows(v2019 - Current) | ![Build Status](https://github.com/DavisHenckel/Powershell-CICD/actions/workflows/WindowsDev.yml/badge.svg)  |
