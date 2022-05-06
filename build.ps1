@@ -7,6 +7,7 @@ param (
 )
 
 function ImportModules {
+    $WarningPreference = "SilentlyContinue"
     Write-Verbose -Message "Initializing Module PSScriptAnalyzer"
     if (-not(Get-Module -Name PSScriptAnalyzer -ListAvailable)){
         Write-Warning "Module 'PSScriptAnalyzer' is missing or out of date. Installing module now."
@@ -42,6 +43,7 @@ function ImportModules {
         Write-Warning "Module 'PS-Sudoku' is missing or out of date. Installing module now."
         Install-Module -Name "PS-Sudoku" -Scope CurrentUser -Force
     }
+    $WarningPreference = $null
 }
 
 function PublishModule {

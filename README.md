@@ -1,7 +1,11 @@
 # PS-Sudoku
 PowerShell module to showcase skills involving CI/CD pipelines, Testing with Pester, PowerShell module development, and recursive backtracking Aglorithms by building a Sudoku solver.
 
-## Current Version - 1.2.0
+## Current Version - 1.2.3
+Install from the [PowerShell Gallery](https://www.powershellgallery.com/packages/PS-Sudoku/1.2.2)!
+```pwsh
+Install-Module -Name PS-Sudoku
+```
 
 ## Build Status - Main Branch
 | CI System | Environment | Job Name & Status |
