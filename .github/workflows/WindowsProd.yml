@@ -1,45 +1,36 @@
-# This is a basic workflow to help you get started with Actions
+name: Windows Validation
 
-name: Windows Testing
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ development ]
+    branches: [ main ]
   pull_request:
-    branches: [ development ]
+    branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build_and_test"
+  # Name of the job
   Windows-Latest:
-    # The type of runner that the job will run on
     runs-on: windows-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@main
 
-      # Runs a single command using the runners shell
-      - name: Define required powershell modules
+      #Define modules to cache
+      - name: Define requires PowerShell Modules
         id: psmodulecache
         uses: potatoqualitee/psmodulecache@v1
         with:
           modules-to-cache: Pester, PSScriptAnalyzer, InvokeBuild, platyPS
       
-      #Add modules to the cache to speed up future deployments
+      # Setup module cache
       - name: Setup PowerShell module cache
         id: cacher
         uses: actions/cache@v2
         with:
           path: ${{ steps.psmodulecache.outputs.modulepath }}
           key: ${{ steps.psmodulecache.outputs.keygen }}
-
+      
       #Install the powershell module if not found in the cache
       - name: Install required PowerShell modules
         
@@ -70,29 +61,25 @@ jobs:
         run: ./build.ps1 "RunAcceptanceTests"
 
   Windows-2022:
-    # The type of runner that the job will run on
     runs-on: windows-2022
-
-      # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@main
 
-      # Runs a single command using the runners shell
-      - name: Define required powershell modules
+      #Define modules to cache
+      - name: Define requires PowerShell Modules
         id: psmodulecache
         uses: potatoqualitee/psmodulecache@v1
         with:
           modules-to-cache: Pester, PSScriptAnalyzer, InvokeBuild, platyPS
       
-      #Add modules to the cache to speed up future deployments
+      # Setup module cache
       - name: Setup PowerShell module cache
         id: cacher
         uses: actions/cache@v2
         with:
           path: ${{ steps.psmodulecache.outputs.modulepath }}
           key: ${{ steps.psmodulecache.outputs.keygen }}
-
+      
       #Install the powershell module if not found in the cache
       - name: Install required PowerShell modules
         
@@ -124,29 +111,25 @@ jobs:
 
 
   Windows-2019:
-    # The type of runner that the job will run on
     runs-on: windows-2019
-
-      # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@main
 
-      # Runs a single command using the runners shell
-      - name: Define required powershell modules
+      #Define modules to cache
+      - name: Define requires PowerShell Modules
         id: psmodulecache
         uses: potatoqualitee/psmodulecache@v1
         with:
           modules-to-cache: Pester, PSScriptAnalyzer, InvokeBuild, platyPS
       
-      #Add modules to the cache to speed up future deployments
+      # Setup module cache
       - name: Setup PowerShell module cache
         id: cacher
         uses: actions/cache@v2
         with:
           path: ${{ steps.psmodulecache.outputs.modulepath }}
           key: ${{ steps.psmodulecache.outputs.keygen }}
-
+      
       #Install the powershell module if not found in the cache
       - name: Install required PowerShell modules
         
