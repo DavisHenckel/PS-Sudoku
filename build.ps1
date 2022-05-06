@@ -1,9 +1,9 @@
 param (
     [parameter(Mandatory=$true)]
-    [ValidateSet("ImportModules", "RunPSScriptAnalyzer", "RunUnitTests", "RunIntegrationTests", "RunAcceptanceTests")]
-    [string]$FunctionToRun
-    # [Parameter(Mandatory=$false)][String]$NugetAPIKey,
-    # [Parameter(Mandatory=$false)][Switch]$ExportAlias
+    [ValidateSet("ImportModules", "RunPSScriptAnalyzer", "RunUnitTests", "RunIntegrationTests", "RunAcceptanceTests", "PublishModule")]
+    [string]$FunctionToRun,
+    [Parameter(Mandatory=$false)]
+    [String]$NugetAPIKey
 )
 
 function ImportModules {
@@ -30,11 +30,28 @@ function ImportModules {
         Write-Warning "Module 'platyPS' is missing or out of date. Installing module now."
         Install-Module -Name platyPS -Scope CurrentUser -Force
     }
+    Write-Verbose -Message "Initializing PowerShellGet"
+    if (-not(Get-Module -Name PowerShellGet -ListAvailable)){
+        Write-Warning "Module 'PowerShellGet' is missing or out of date. Installing module now."
+        Install-Module -Name PowerShellGet -Scope CurrentUser -Force
+    }
     Write-Verbose -Message "Initializing PowerShell-CICD"
     if (-not(Get-Module -Name PowerShell-CICD -ListAvailable)){
         Write-Warning "Module 'PowerShell-CICD' is missing or out of date. Installing module now."
         .\LocalModuleInstall.ps1
     }
+}
+
+function PublishModule {
+    Write-Verbose -Message "Publishing Module PS-Sudoku"
+    Try {
+        Publish-Module -Path "." -NuGetAPIKey $NugetAPIKey
+    }
+    Catch {
+        Write-Warning "Publishing Module PS-Sudoku failed."
+        Write-Error $_
+    }
+    Write-Verbose "PS-Sudoku published successfully."
 }
 
 function RunPSScriptAnalyzer {
@@ -75,3 +92,4 @@ Function RunAcceptanceTests {
 }
 
 Invoke-Expression $FunctionToRun
+# Invoke-Expression $FunctionToRun
