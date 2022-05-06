@@ -1,0 +1,21 @@
+name: Publish Module
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  PublishToPSGallery:
+    needs: [LinuxProd, MacOSProd, WindowsProd]
+    runs-on: ubuntu-latest
+    steps:
+      # Runs a set of commands using the runners shell
+      - name: Setup Environment
+        shell: pwsh
+        run: ./build.ps1 "ImportModules"
+      
+      - name: Publish
+        shell: pwsh
+        run: ./build.ps1 "PublishModule" -NugetAPIKey "${{ secrets.NUGET_API_KEY }}"
