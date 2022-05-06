@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Windows Testing
+name: Linux Testing
 
 # Controls when the workflow will run
 on:
@@ -15,10 +15,9 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build_and_test"
-  Windows-Latest:
+  Uuntu-Latest:
     # The type of runner that the job will run on
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -69,9 +68,9 @@ jobs:
         shell: pwsh
         run: ./build.ps1 "RunAcceptanceTests"
 
-  Windows-2022:
+  Uuntu-Older:
     # The type of runner that the job will run on
-    runs-on: windows-2022
+    runs-on: ubuntu-20.04
 
       # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -123,9 +122,9 @@ jobs:
         run: ./build.ps1 "RunAcceptanceTests"
 
 
-  Windows-2019:
+  Ubuntu-Oldest:
     # The type of runner that the job will run on
-    runs-on: windows-2019
+    runs-on: ubuntu-18.04
 
       # Steps represent a sequence of tasks that will be executed as part of the job
     steps:

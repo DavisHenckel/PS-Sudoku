@@ -1,0 +1,160 @@
+name: Linux Validation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  # Name of the job
+  Ubuntu-latest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+
+      #Define modules to cache
+      - name: Define requires PowerShell Modules
+        id: psmodulecache
+        uses: potatoqualitee/psmodulecache@v1
+        with:
+          modules-to-cache: Pester, PSScriptAnalyzer, InvokeBuild, platyPS
+      
+      # Setup module cache
+      - name: Setup PowerShell module cache
+        id: cacher
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.psmodulecache.outputs.modulepath }}
+          key: ${{ steps.psmodulecache.outputs.keygen }}
+      
+      #Install the powershell module if not found in the cache
+      - name: Install required PowerShell modules
+        
+        shell: pwsh
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module ${{ steps.psmodulecache.outputs.needed }} -ErrorAction Stop
+
+      # Runs a set of commands using the runners shell
+      - name: Setup Environment
+        shell: pwsh
+        run: ./build.ps1 "ImportModules"
+      
+      - name: Run Script Analyzer
+        shell: pwsh
+        run: ./build.ps1 "RunPSScriptAnalyzer"
+
+      - name: Run Unit Tests
+        shell: pwsh
+        run: ./build.ps1 "RunUnitTests"
+
+      - name: Run Integration Tests
+        shell: pwsh
+        run: ./build.ps1 "RunIntegrationTests"
+
+      - name: Run Acceptance Tests
+        shell: pwsh
+        run: ./build.ps1 "RunAcceptanceTests"
+
+  Ubuntu-Older:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@main
+
+      #Define modules to cache
+      - name: Define requires PowerShell Modules
+        id: psmodulecache
+        uses: potatoqualitee/psmodulecache@v1
+        with:
+          modules-to-cache: Pester, PSScriptAnalyzer, InvokeBuild, platyPS
+      
+      # Setup module cache
+      - name: Setup PowerShell module cache
+        id: cacher
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.psmodulecache.outputs.modulepath }}
+          key: ${{ steps.psmodulecache.outputs.keygen }}
+      
+      #Install the powershell module if not found in the cache
+      - name: Install required PowerShell modules
+        
+        shell: pwsh
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module ${{ steps.psmodulecache.outputs.needed }} -ErrorAction Stop
+
+      # Runs a set of commands using the runners shell
+      - name: Setup Environment
+        shell: pwsh
+        run: ./build.ps1 "ImportModules"
+      
+      - name: Run Script Analyzer
+        shell: pwsh
+        run: ./build.ps1 "RunPSScriptAnalyzer"
+
+      - name: Run Unit Tests
+        shell: pwsh
+        run: ./build.ps1 "RunUnitTests"
+
+      - name: Run Integration Tests
+        shell: pwsh
+        run: ./build.ps1 "RunIntegrationTests"
+
+      - name: Run Acceptance Tests
+        shell: pwsh
+        run: ./build.ps1 "RunAcceptanceTests"
+
+
+  Ubuntu-Oldest:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@main
+
+      #Define modules to cache
+      - name: Define requires PowerShell Modules
+        id: psmodulecache
+        uses: potatoqualitee/psmodulecache@v1
+        with:
+          modules-to-cache: Pester, PSScriptAnalyzer, InvokeBuild, platyPS
+      
+      # Setup module cache
+      - name: Setup PowerShell module cache
+        id: cacher
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.psmodulecache.outputs.modulepath }}
+          key: ${{ steps.psmodulecache.outputs.keygen }}
+      
+      #Install the powershell module if not found in the cache
+      - name: Install required PowerShell modules
+        
+        shell: pwsh
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module ${{ steps.psmodulecache.outputs.needed }} -ErrorAction Stop
+
+      # Runs a set of commands using the runners shell
+      - name: Setup Environment
+        shell: pwsh
+        run: ./build.ps1 "ImportModules"
+      
+      - name: Run Script Analyzer
+        shell: pwsh
+        run: ./build.ps1 "RunPSScriptAnalyzer"
+
+      - name: Run Unit Tests
+        shell: pwsh
+        run: ./build.ps1 "RunUnitTests"
+
+      - name: Run Integration Tests
+        shell: pwsh
+        run: ./build.ps1 "RunIntegrationTests"
+
+      - name: Run Acceptance Tests
+        shell: pwsh
+        run: ./build.ps1 "RunAcceptanceTests"
