@@ -1,4 +1,4 @@
-name: Windows Validation
+name: Mac OS Validation
 
 on:
   push:
