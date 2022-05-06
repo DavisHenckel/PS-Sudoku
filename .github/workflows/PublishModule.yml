@@ -1,15 +1,14 @@
 name: Publish Module
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
+  workflow_run:
+    workflows: [LinuxProd]
+    types:
+      - completed
 jobs:
   PublishToPSGallery:
-    needs: [LinuxProd, MacOSProd, WindowsProd]
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       # Runs a set of commands using the runners shell
       - name: Setup Environment
