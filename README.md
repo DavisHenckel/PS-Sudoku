@@ -1,6 +1,7 @@
 # PowerShell-CICD
 PowerShell module to showcase skills involving CI/CD pipelines, Testing with Pester, PowerShell module development, and recursive backtracking Aglorithms by building a Sudoku solver.
 
+## Current Version - 1.2.0
 
 ## Build Status - Main Branch
 | CI System | Environment | Job Name & Status |
