@@ -2,7 +2,7 @@ name: Publish Module
 
 on:
   workflow_run:
-    workflows: [LinuxProd]
+    workflows: [Linux Validation]
     types:
       - completed
 jobs:
