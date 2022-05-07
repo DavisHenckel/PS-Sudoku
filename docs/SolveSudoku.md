@@ -13,7 +13,7 @@ Solves a Sudoku puzzle
 ## SYNTAX
 
 ```
-SolveSudoku [-SudokuGrid] <Object> [[-WatchAlg] <Boolean>] [[-StopWatch] <Object>] [<CommonParameters>]
+SolveSudoku [-SudokuGrid] <Object> [-WatchAlgorithm] [[-StopWatch] <Object>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,16 +43,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -WatchAlg
-A boolean to indicate whether to use print statements at each call to watch the algorithm in action.
+### -WatchAlgorithm
+{{ Fill WatchAlgorithm Description }}
 
 ```yaml
-Type: Boolean
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
+Position: Named
 Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -69,7 +69,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -1,10 +1,17 @@
 # PS-Sudoku
-PowerShell module to showcase skills involving CI/CD pipelines, Testing with Pester, PowerShell module development, and recursive backtracking Aglorithms by building a Sudoku solver.
+A recursive Sudoku solver written as a PowerShell module.
 
-## Current Version - 1.2.3
+## Current Version - 1.2.4
 Install from the [PowerShell Gallery](https://www.powershellgallery.com/packages/PS-Sudoku/1.2.2)!
 ```pwsh
 Install-Module -Name PS-Sudoku
+```
+### Instructions
+```pwsh
+$SudokuBoard = GenerateGrid -Difficulty "Medium"
+PrintGrid -SudokuGrid $SudokuBoard
+SolveSudoku -SudokuGrid $SudokuBoard
+PrintGrid -SudokuGrid $SudokuBoard
 ```
 
 ## Build Status - Main Branch
