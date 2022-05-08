@@ -8,7 +8,7 @@
 .PARAMETER WatchAglorithm
     A switch to indicate whether to use print statements at each call to watch the algorithm in action.
 .PARAMETER StopWatch
-    A timer that tracks how long the algorithm has been running. If it takes longer than 60 seconds, return false and retry. TODO to fix this if possible.
+    A timer that tracks how long the algorithm has been running. If it takes longer than 60 seconds, return false.
 .EXAMPLE
     SolveSudoku -SudokuGrid $SudokuGrid
 .INPUTS
@@ -49,7 +49,7 @@ Function SolveSudoku {
                 Write-Host "Backtracking..."
             }
             #if the number can't be placed because there is no solution on future calls, remove it from the grid
-            $SudokuGrid[$Row-1][$Column-1] = 0
+            $SudokuGrid[$Row-1][$Column-1] = '-'
         }
         return $false #puzzle can't be solved
     }
@@ -68,7 +68,7 @@ Function SolveSudoku {
                 }
             }
             #if the number can't be placed because there is no solution on future calls, remove it from the grid
-            $SudokuGrid[$Row-1][$Column-1] = 0
+            $SudokuGrid[$Row-1][$Column-1] = '-'
         }
         return $false #puzzle can't be solved
     }

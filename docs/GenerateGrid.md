@@ -57,7 +57,7 @@ $SudokuBoard = GenerateGrid -Difficulty "Insane" #will provide 17 random clues
 ### -Difficulty
 The difficulty of the Sudoku Board.
 This must be in the set "Filled", "Empty", "Easy", "Medium", "Hard", "Expert", or "Insane" where easy-insane is 37,30,23,20,17 number of clues respectively
-Empty is the default and will generate an empty board of all 0s.
+Empty is the default and will generate an empty board of all '-'.
 
 ```yaml
 Type: String

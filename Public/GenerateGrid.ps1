@@ -12,8 +12,8 @@ $DIFFICULTYCLUES = @{
 .DESCRIPTION
     By Default, will generate an Empty 2D array that will be used for the Sudoku Board. Allows for optional parameters that will give the user the ability to generate a Sudoku Board with a specific difficulty.
 .PARAMETER Difficulty
-    The difficulty of the Sudoku Board. This must be in the set "Filled", "Empty", "Easy", "Medium", "Hard", "Expert", or "Insane" where easy-insane is 37,30,23,20,17 number of clues respectively
-    Empty is the default and will generate an empty board of all 0s.
+    The difficulty of the Sudoku Board. This must be in the set "Filled", "Empty", "Easy", "Medium", "Hard", "Expert", or "Insane" where easy-insane is 37,3'-',23,2'-',17 number of clues respectively
+    Empty is the default and will generate an empty board of all '-'.
 .EXAMPLE
     $SudokuBoard = GenerateGrid
 .EXAMPLE
@@ -49,27 +49,27 @@ Function GenerateGrid {
         )
     }
     $StarterArr = [System.Array]@(
-        [System.Array]@(0,0,0,0,0,0,0,0,0),
-        [System.Array]@(0,0,0,0,0,0,0,0,0),
-        [System.Array]@(0,0,0,0,0,0,0,0,0),
-        [System.Array]@(0,0,0,0,0,0,0,0,0),
-        [System.Array]@(0,0,0,0,0,0,0,0,0),
-        [System.Array]@(0,0,0,0,0,0,0,0,0),
-        [System.Array]@(0,0,0,0,0,0,0,0,0),
-        [System.Array]@(0,0,0,0,0,0,0,0,0),
-        [System.Array]@(0,0,0,0,0,0,0,0,0)
+        [System.Array]@('-','-','-','-','-','-','-','-','-'),
+        [System.Array]@('-','-','-','-','-','-','-','-','-'),
+        [System.Array]@('-','-','-','-','-','-','-','-','-'),
+        [System.Array]@('-','-','-','-','-','-','-','-','-'),
+        [System.Array]@('-','-','-','-','-','-','-','-','-'),
+        [System.Array]@('-','-','-','-','-','-','-','-','-'),
+        [System.Array]@('-','-','-','-','-','-','-','-','-'),
+        [System.Array]@('-','-','-','-','-','-','-','-','-'),
+        [System.Array]@('-','-','-','-','-','-','-','-','-')
     )
     if ($Difficulty -eq "UniqueSolution") {
         return [System.Array]@(
-            [System.Array]@(0,0,0,8,0,1,0,0,0),
-            [System.Array]@(0,0,0,0,0,0,0,4,3),
-            [System.Array]@(5,0,0,0,0,0,0,0,0),
-            [System.Array]@(0,0,0,0,7,0,8,0,0),
-            [System.Array]@(0,0,0,0,0,0,1,0,0),
-            [System.Array]@(0,2,0,0,3,0,0,0,0),
-            [System.Array]@(6,0,0,0,0,0,0,7,5),
-            [System.Array]@(0,0,3,4,0,0,0,0,0),
-            [System.Array]@(0,0,0,2,0,0,6,0,0)
+            [System.Array]@('-','-','-',8,'-',1,'-','-','-'),
+            [System.Array]@('-','-','-','-','-','-','-',4,3),
+            [System.Array]@(5,'-','-','-','-','-','-','-','-'),
+            [System.Array]@('-','-','-','-',7,'-',8,'-','-'),
+            [System.Array]@('-','-','-','-','-','-',1,'-','-'),
+            [System.Array]@('-',2,'-','-',3,'-','-','-','-'),
+            [System.Array]@(6,'-','-','-','-','-','-',7,5),
+            [System.Array]@('-','-',3,4,'-','-','-','-','-'),
+            [System.Array]@('-','-','-',2,'-','-',6,'-','-')
         )
     }
     if ($Difficulty -eq "Empty") {

@@ -60,8 +60,7 @@ Accept wildcard characters: False
 
 ### -StopWatch
 A timer that tracks how long the algorithm has been running.
-If it takes longer than 60 seconds, return false and retry.
-TODO to fix this if possible.
+If it takes longer than 60 seconds, return false.
 
 ```yaml
 Type: Object

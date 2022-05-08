@@ -18,27 +18,27 @@ Describe 'IsSubgridPlacementValid' {
         IsSubgridPlacementValid $SudokuGrid -Row 1 -Column 2 -Number 9 | should -be $true
     }
     It 'Ensure out of upper bounds row placement returns error'{
-        $SudokuGrid[0][0] = 0 #reset grid
+        $SudokuGrid[0][0] = '-' #reset grid
         { IsSubgridPlacementValid $SudokuGrid -Row 11 -Column 2 -Number 1 } | should -throw 
     }
     It 'Ensure out of lower bounds row placement returns error'{
-        $SudokuGrid[0][0] = 0 #reset grid
+        $SudokuGrid[0][0] = '-' #reset grid
         { IsSubgridPlacementValid $SudokuGrid -Row 0 -Column 2 -Number 1 } | should -throw 
     }
     It 'Ensure out of upper bounds column placement returns error'{
-        $SudokuGrid[0][0] = 0 #reset grid
+        $SudokuGrid[0][0] = '-' #reset grid
         { IsSubgridPlacementValid $SudokuGrid -Row 1 -Column 10 -Number 1 } | should -throw 
     }
     It 'Ensure out of lower bounds column placement returns error'{
-        $SudokuGrid[0][0] = 0 #reset grid
+        $SudokuGrid[0][0] = '-' #reset grid
         { IsSubgridPlacementValid $SudokuGrid -Row 1 -Column 0 -Number 1 } | should -throw 
     }
     It 'Ensure out of upper bounds number to place returns error'{
-        $SudokuGrid[0][0] = 0 #reset grid
+        $SudokuGrid[0][0] = '-' #reset grid
         { IsSubgridPlacementValid $SudokuGrid -Row 1 -Column 2 -Number 10 } | should -throw 
     }
     It 'Ensure out of lower bounds number to place returns error'{
-        $SudokuGrid[0][0] = 0 #reset grid
+        $SudokuGrid[0][0] = '-' #reset grid
         { IsSubgridPlacementValid $SudokuGrid -Row 1 -Column 2 -Number 0 } | should -throw 
     }
     It 'Additional invalid subgrids tests'{
