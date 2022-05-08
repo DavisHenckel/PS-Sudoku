@@ -11,7 +11,7 @@ Describe "FindValidSudokuGrid" {
             $ct = 0
             ForEach ($Row in $NewGrid) {
                 ForEach ($Num in $Row) {
-                    if ($Num -gt 0) {
+                    if ($Num -ne '-') {
                         $ct += 1
                     }
                 }   

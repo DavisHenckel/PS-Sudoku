@@ -14,17 +14,17 @@ Describe 'IsMoveValid' {
     It 'Ensure invalid move if row conflict but column & subgrid OK' {
         $SudokuGrid[0][0] = 1
         IsMoveValid -SudokuGrid $SudokuGrid -Number 1 -Row 1 -Column 6 | should -be $false
-        $SudokuGrid[0][0] = 0 #reinitialize
+        $SudokuGrid[0][0] = '-' #reinitialize
     }
     It 'Ensure invalid move if column conflict but row & subgrid OK' {
         $SudokuGrid[0][2] = 7
         IsMoveValid -SudokuGrid $SudokuGrid -Number 7 -Row 4 -Column 3 | should -be $false
-        $SudokuGrid[0][2] = 0 #reinitialize
+        $SudokuGrid[0][2] = '-' #reinitialize
     }
     It 'Ensure invalid move if subgrid conflict but row & column OK' {
         $SudokuGrid[0][2] = 7
         IsMoveValid -SudokuGrid $SudokuGrid -Number 7 -Row 2 -Column 2 | should -be $false
-        $SudokuGrid[0][2] = 0 #reinitialize
+        $SudokuGrid[0][2] = '-' #reinitialize
     }
     It 'Valid move in non-empty subgrid, row and column' {
         $SudokuGrid[1][1] = 7

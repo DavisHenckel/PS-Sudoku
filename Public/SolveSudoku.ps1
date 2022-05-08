@@ -49,7 +49,7 @@ Function SolveSudoku {
                 Write-Host "Backtracking..."
             }
             #if the number can't be placed because there is no solution on future calls, remove it from the grid
-            $SudokuGrid[$Row-1][$Column-1] = 0
+            $SudokuGrid[$Row-1][$Column-1] = '-'
         }
         return $false #puzzle can't be solved
     }
@@ -68,7 +68,7 @@ Function SolveSudoku {
                 }
             }
             #if the number can't be placed because there is no solution on future calls, remove it from the grid
-            $SudokuGrid[$Row-1][$Column-1] = 0
+            $SudokuGrid[$Row-1][$Column-1] = '-'
         }
         return $false #puzzle can't be solved
     }
