@@ -8,7 +8,7 @@
 .PARAMETER WatchAglorithm
     A switch to indicate whether to use print statements at each call to watch the algorithm in action.
 .PARAMETER StopWatch
-    A timer that tracks how long the algorithm has been running. If it takes longer than 60 seconds, return false and retry. TODO to fix this if possible.
+    A timer that tracks how long the algorithm has been running. If it takes longer than 60 seconds, return false.
 .EXAMPLE
     SolveSudoku -SudokuGrid $SudokuGrid
 .INPUTS
