@@ -2,7 +2,7 @@
 .SYNOPSIS
     Gets a user's number placement.
 .DESCRIPTION
-    Gets a user's number placement after validating the move is valid given the current state of the board.
+    Gets a user's number placement ensuring numbers are between 1 and 9 (inclusive)
 .PARAMETER SudokuGrid   
     The current state of the Sudoku Grid.
 .EXAMPLE
@@ -18,42 +18,20 @@ Function GetSudokuMove {
         [System.Object]$SudokuGrid
     )
     while($true) {
-        #TODO Refactor into one function.
-        # $Row = Read-Host -Prompt "Enter row placement(1-9)"
-        # $Column = Read-Host -Prompt "Enter column placement(1-9)"
-        # $NumToPlace = Read-Host -Prompt "Enter the nunber to place (1-9)"
-        $RowValid = IsRowPlacementValid -SudokuGrid $SudokuGrid -Row $Row -Number $NumToPlace
-        $ColValid = IsColumnPlacementValid -SudokuGrid $SudokuGrid -Column $Column -Number $NumToPlace
-        $SubgridValid = IsSubgridPlacementValid -SudokuGrid $SudokuGrid -Row $Row -Column $Column -Number $NumToPlace
-        Write-Host "Row Placement: " -ForegroundColor Yellow -NoNewline
-        if ($RowValid) {
-            Write-Host "Valid!" -ForegroundColor Green
+        $Row, $Column, $NumToPlace = $null, $null, $null
+        try {
+            [int32]$Row = Read-Host -Prompt "Enter row placement(1-9)"
+            [int32]$Column = Read-Host -Prompt "Enter column placement(1-9)"
+            [int32]$NumToPlace = Read-Host -Prompt "Enter the nunber to place (1-9)" 
         }
-        else {
-            Write-Host "Invalid!" -ForegroundColor Red
+        catch {
+            Write-Error "Row, Column and Number must be a numeric value."
+            continue
         }
-        Write-Host "Column Placement: " -ForegroundColor Yellow  -NoNewline
-        if ($ColValid) {
-            Write-Host "Valid!" -ForegroundColor Green
-        }
-        else {
-            Write-Host "Invalid!" -ForegroundColor Red
-        }
-        Write-Host "Subgrid Placement: " -ForegroundColor Yellow  -NoNewline
-        if ($SubgridValid) {
-            Write-Host "Valid!" -ForegroundColor Green
-        }
-        else {
-            Write-Host "Invalid!" -ForegroundColor Red
-        }
-        if ($RowValid -and $ColValid -and $SubgridValid) {
+        if (($Row -lt 10 -and $Row -gt 0) -and ($Column -lt 10 -and $Column -gt 0) -and ($NumToPlace -lt 10 -and $NumToPlace -gt 0) ) {
             $Placement = [System.Tuple]::Create($Row, $Column)
             return @($NumToPlace, $Placement)
         }
+        Write-Error "Row, Column, and Number must be between 1-9 (inclusive)"
     }  
 }
-
-# $t = GenerateGrid -Difficulty UniqueSolution
-# PrintGrid -SudokuGrid $t
-# $x = GetSudokuMove -SudokuGrid $t
-# $b = 5
