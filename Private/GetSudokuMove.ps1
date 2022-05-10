@@ -18,9 +18,10 @@ Function GetSudokuMove {
         [System.Object]$SudokuGrid
     )
     while($true) {
-        $Row = Read-Host -Prompt "Enter row placement(1-9)"
-        $Column = Read-Host -Prompt "Enter column placement(1-9)"
-        $NumToPlace = Read-Host -Prompt "Enter the nunber to place (1-9)"
+        #TODO Refactor into one function.
+        # $Row = Read-Host -Prompt "Enter row placement(1-9)"
+        # $Column = Read-Host -Prompt "Enter column placement(1-9)"
+        # $NumToPlace = Read-Host -Prompt "Enter the nunber to place (1-9)"
         $RowValid = IsRowPlacementValid -SudokuGrid $SudokuGrid -Row $Row -Number $NumToPlace
         $ColValid = IsColumnPlacementValid -SudokuGrid $SudokuGrid -Column $Column -Number $NumToPlace
         $SubgridValid = IsSubgridPlacementValid -SudokuGrid $SudokuGrid -Row $Row -Column $Column -Number $NumToPlace
@@ -45,5 +46,14 @@ Function GetSudokuMove {
         else {
             Write-Host "Invalid!" -ForegroundColor Red
         }
-    }    
+        if ($RowValid -and $ColValid -and $SubgridValid) {
+            $Placement = [System.Tuple]::Create($Row, $Column)
+            return @($NumToPlace, $Placement)
+        }
+    }  
 }
+
+# $t = GenerateGrid -Difficulty UniqueSolution
+# PrintGrid -SudokuGrid $t
+# $x = GetSudokuMove -SudokuGrid $t
+# $b = 5
