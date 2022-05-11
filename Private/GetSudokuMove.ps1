@@ -15,17 +15,32 @@
 Function GetSudokuMove {
     param(
         [parameter(Mandatory=$true)]
-        [System.Object]$SudokuGrid
+        [System.Object]$SudokuGrid,
+        [parameter(Mandatory=$true)]
+        [System.Object]$OriginalGrid
     )
     while($true) {
         $Row, $Column, $NumToPlace = $null, $null, $null
-        try {
-            [int32]$Row = Read-Host -Prompt "Enter row placement(1-9)"
-            [int32]$Column = Read-Host -Prompt "Enter column placement(1-9)"
-            [int32]$NumToPlace = Read-Host -Prompt "Enter the nunber to place (1-9)" 
+        $Row = Read-Host -Prompt "Enter row placement(1-9)"
+        if ($Row -eq '-hint' -or $Row -eq '-solve') {
+            return $Row
         }
-        catch {
-            Write-Error "Row, Column and Number must be a numeric value."
+        $Column = Read-Host -Prompt "Enter column placement(1-9)"
+        if ($Column -eq '-hint' -or $Column -eq '-solve') {
+            return $Column
+        }
+        $NumToPlace = Read-Host -Prompt "Enter the number to place (1-9)" 
+        if ($NumToPlace -eq '-hint' -or $NumToPlace -eq '-solve') {
+            return $NumToPlace
+        }
+        Try {
+            $Row, $Column, $NumToPlace = [int32]$Row, [int32]$Column, [int32]$NumToPlace
+        }
+        Catch {
+            Write-Error "Row, Column, and Number must be a number between 1-9, '-hint', or '-solve'"
+        }
+        if ($OriginalGrid[$Row-1][$Column-1] -ne '-') {
+            Write-Error "You cannot modify this number as it is part of the original board."
             continue
         }
         if (($Row -lt 10 -and $Row -gt 0) -and ($Column -lt 10 -and $Column -gt 0) -and ($NumToPlace -lt 10 -and $NumToPlace -gt 0) ) {
