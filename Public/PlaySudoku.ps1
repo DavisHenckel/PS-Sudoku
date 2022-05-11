@@ -22,24 +22,40 @@ Function PlaySudoku {
         break
     }
     Write-Host "Generating a Sudoku puzzle with $Difficulty difficulty..." -ForegroundColor Green
-    $SudokuBoard = GenerateGrid -Difficulty "UniqueSolution"
+    $SudokuBoard = GenerateGrid -Difficulty $Difficulty
     $OriginalBoard = DeepCopyArray -Source $SudokuBoard #Var to keep track of original board. 
     Write-Host "Board Generated!" -ForegroundColor Green
     Write-Host "This is your Sudoku puzzle..." -ForegroundColor Green
-    PrintGrid -SudokuGrid $SudokuBoard
+    PrintSudokuGridUI -OriginalGrid $OriginalBoard -SudokuGrid $SudokuBoard
     Write-Host "Have fun!" -ForegroundColor Green
+    $count = 0
     while ($null -ne (FindEmptySpot -SudokuGrid $SudokuBoard)) {
-        $PlayersMove = GetSudokuMove -SudokuGrid $SudokuBoard
+        if ($count % 5 -eq 0) {
+            Write-Host "Enter '-hint' to provide a hint given the current state of your puzzle.`nEnter '-solve' to attempt solving given the current state of your puzzle" -ForegroundColor Yellow
+        }
+        $PlayersMove = GetSudokuMove -SudokuGrid $SudokuBoard -OriginalGrid $OriginalBoard
+        if ($PlayersMove -eq '-hint') {
+            #todo
+        }
+        if ($PlayersMove -eq '-solve') {
+            $CurrentState = DeepCopyArray -Source $SudokuBoard
+            $Solvable = SolveSudoku -SudokuGrid $CurrentState
+            if ($Solvable) {
+                Write-Host -ForegroundColor Green "The puzzle has been solved!"
+                $SudokuBoard = $CurrentState
+                PrintSudokuGridUI -OriginalGrid $OriginalBoard -SudokuGrid $SudokuBoard
+            }
+            else {
+                Write-Host "The puzzle you have built is not solvable" -ForegroundColor Yellow
+            }
+        }
         $ValidMove = ValidateSudokuMove -SudokuGrid $SudokuBoard -SudokuMove $PlayersMove
         if ($ValidMove) {
             $Row, $Column, $NumToPlace = (($PlayersMove[1].Item1) - 1), (($PlayersMove[1].Item2) - 1), ($PlayersMove[0])
             $SudokuBoard[$Row][$Column] = $NumToPlace  
-            PrintGrid -SudokuGrid $SudokuBoard
+            PrintSudokuGridUI -OriginalGrid $OriginalBoard -SudokuGrid $SudokuBoard
         }
-        else {
-            continue
-        }
+        $count++
     }
+    Write-Host "Thanks for playing!" -ForegroundColor Green
 }
-
-PlaySudoku
