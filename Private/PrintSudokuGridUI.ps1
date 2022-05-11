@@ -7,7 +7,7 @@ function PrintSudokuGridUI {
     )
     Write-Host "+++++++++++++++++++++++++"
     For($Row = 1; $Row -lt 10; $Row++) {
-        if ($Row % 4 -eq 0) {
+        if ($Row -eq 4 -or $Row -eq 7) {
             Write-Host "|-------+-------+------ |" 
         }
         For($Col = 1; $Col -lt 10; $Col++) {

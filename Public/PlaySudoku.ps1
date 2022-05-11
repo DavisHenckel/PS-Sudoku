@@ -46,16 +46,18 @@ Function PlaySudoku {
                 PrintSudokuGridUI -OriginalGrid $OriginalBoard -SudokuGrid $SudokuBoard
             }
             else {
-                Write-Host "The puzzle you have built is not solvable" -ForegroundColor Yellow
+                Write-Host "The current state of your puzzle is not solvable." -ForegroundColor Red
             }
         }
-        $ValidMove = ValidateSudokuMove -SudokuGrid $SudokuBoard -SudokuMove $PlayersMove
-        if ($ValidMove) {
-            $Row, $Column, $NumToPlace = (($PlayersMove[1].Item1) - 1), (($PlayersMove[1].Item2) - 1), ($PlayersMove[0])
-            $SudokuBoard[$Row][$Column] = $NumToPlace  
-            PrintSudokuGridUI -OriginalGrid $OriginalBoard -SudokuGrid $SudokuBoard
+        else {
+            $ValidMove = ValidateSudokuMove -SudokuGrid $SudokuBoard -SudokuMove $PlayersMove
+            if ($ValidMove) {
+                $Row, $Column, $NumToPlace = (($PlayersMove[1].Item1) - 1), (($PlayersMove[1].Item2) - 1), ($PlayersMove[0])
+                $SudokuBoard[$Row][$Column] = $NumToPlace  
+                PrintSudokuGridUI -OriginalGrid $OriginalBoard -SudokuGrid $SudokuBoard
+            }
+            $count++
         }
-        $count++
     }
     Write-Host "Thanks for playing!" -ForegroundColor Green
 }
