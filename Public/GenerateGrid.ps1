@@ -10,7 +10,7 @@ $DIFFICULTYCLUES = @{
 .SYNOPSIS
     Generates a 2D Arraylist that represents the Sudoku board.
 .DESCRIPTION
-    By Default, will generate an Empty 2D array that will be used for the Sudoku Board. Allows for optional parameters that will give the user the ability to generate a Sudoku Board with a specific difficulty.
+    By Default, will generate an Empty 2D array that will be used for the Sudoku Board. Allows for optional parameters that will give the user the ability to generate a Sudoku Board with a specified difficulty.
 .PARAMETER Difficulty
     The difficulty of the Sudoku Board. This must be in the set "Filled", "Empty", "Easy", "Medium", "Hard", "Expert", or "Insane" where easy-insane is 37,3'-',23,2'-',17 number of clues respectively
     Empty is the default and will generate an empty board of all '-'.
