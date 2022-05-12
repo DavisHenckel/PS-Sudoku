@@ -2,18 +2,22 @@
 .SYNOPSIS
     Function to play Sudoku
 .DESCRIPTION
-    Allows a player to play sudoku
+    Allows a player to play Sudoku
 .EXAMPLE
     PlaySudoku
 .OUTPUTS
-    TODO
+    Gameplay steps to the console.
+.NOTES
+    The Sudoku game allows the option to generate a board of any difficulty and then allow the user to play the game.
+    If the user gets stuck, there is an option to provide a hint, and or solve the remainder of the puzzle.
+    The game is over when the user has solved the puzzle or the algorithm has solved it.
 #>
 Function PlaySudoku {
     $DifficultyOptions = [System.Collections.Arraylist]@("Easy","Medium","Hard","Expert","Insane")
     $Difficulty = $null
     Write-Host "Welcome to PS-Sudoku!" -ForegroundColor Green
     while($true) {
-        Write-Host "Enter a Difficulty level. The choices are:`n  * Easy`n  * Medium`n  * Hard`n  * Expert`n  * Insane" -ForegroundColor Green
+        Write-Host "Enter a Difficulty level. The choices are:`n  * Easy`n  * Medium`n  * Hard`n  * Expert`n  * Insane`n: " -ForegroundColor Green -NoNewline
         [string]$Difficulty = Read-Host
         if (($DifficultyOptions.Contains($Difficulty)) -eq $false) {
             Write-Error "You must select one of the described Difficulty levels"
@@ -39,21 +43,16 @@ Function PlaySudoku {
             $CurrentState = DeepCopyArray -Source $SudokuBoard
             $Solvable = SolveSudoku -SudokuGrid $CurrentState
             if ($Solvable) {
-                $EmptySpot = FindEmptySpot -SudokuGrid $OriginalBoard
+                $EmptySpot = FindEmptySpot -SudokuGrid $SudokuBoard
                 $Hint = $CurrentState[($EmptySpot.Item1)-1][($EmptySpot.Item2)-1]
                 Write-Host -ForegroundColor Cyan "Place $Hint at row:$($EmptySpot.Item1), col:$($EmptySpot.Item2)"
             }
             else {
                 Write-Host "The current state of your puzzle is not solvable." -ForegroundColor Red
-                Write-Host "Generating a clue given the original board..." -ForegroundColor Yellow
-                $CopyBoard = DeepCopyArray -Source $OriginalBoard
-                SolveSudoku -SudokuGrid $CopyBoard | Out-Null
-                $EmptySpot = FindEmptySpot -SudokuGrid $OriginalBoard
-                $Hint = $CopyBoard[($EmptySpot.Item1)-1][($EmptySpot.Item2)-1]
-                Write-Host -ForegroundColor Cyan "Place $Hint at row:$($EmptySpot.Item1), col:$($EmptySpot.Item2)"
             }
         }
         elseif ($PlayersMove -eq '-solve') {
+            Write-Host "Attempting to solve the current puzzle..." -ForegroundColor Yellow
             $CurrentState = DeepCopyArray -Source $SudokuBoard
             $Solvable = SolveSudoku -SudokuGrid $CurrentState
             if ($Solvable) {
