@@ -35,9 +35,25 @@ Function PlaySudoku {
         }
         $PlayersMove = GetSudokuMove -SudokuGrid $SudokuBoard -OriginalGrid $OriginalBoard
         if ($PlayersMove -eq '-hint') {
-            #todo
+            Write-Host "Generating a hint given the current puzzle..." -ForegroundColor Yellow
+            $CurrentState = DeepCopyArray -Source $SudokuBoard
+            $Solvable = SolveSudoku -SudokuGrid $CurrentState
+            if ($Solvable) {
+                $EmptySpot = FindEmptySpot -SudokuGrid $OriginalBoard
+                $Hint = $CurrentState[($EmptySpot.Item1)-1][($EmptySpot.Item2)-1]
+                Write-Host -ForegroundColor Cyan "Place $Hint at row:$($EmptySpot.Item1), col:$($EmptySpot.Item2)"
+            }
+            else {
+                Write-Host "The current state of your puzzle is not solvable." -ForegroundColor Red
+                Write-Host "Generating a clue given the original board..." -ForegroundColor Yellow
+                $CopyBoard = DeepCopyArray -Source $OriginalBoard
+                SolveSudoku -SudokuGrid $CopyBoard | Out-Null
+                $EmptySpot = FindEmptySpot -SudokuGrid $OriginalBoard
+                $Hint = $CopyBoard[($EmptySpot.Item1)-1][($EmptySpot.Item2)-1]
+                Write-Host -ForegroundColor Cyan "Place $Hint at row:$($EmptySpot.Item1), col:$($EmptySpot.Item2)"
+            }
         }
-        if ($PlayersMove -eq '-solve') {
+        elseif ($PlayersMove -eq '-solve') {
             $CurrentState = DeepCopyArray -Source $SudokuBoard
             $Solvable = SolveSudoku -SudokuGrid $CurrentState
             if ($Solvable) {
