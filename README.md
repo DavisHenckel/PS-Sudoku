@@ -1,7 +1,7 @@
 # PS-Sudoku
 A recursive Sudoku solver written as a PowerShell module.
 
-## Current Version - 1.3.4
+## Current Version - 2.0.0
 Install from the [PowerShell Gallery](https://www.powershellgallery.com/packages/PS-Sudoku)!
 ```pwsh
 Install-Module -Name PS-Sudoku
@@ -23,6 +23,10 @@ After the solver is complete, print the finished Sudoku board!
 ```pwsh
 PrintGrid -SudokuGrid $SudokuBoard
 ```
+
+### Play Sudoku
+In version 2.0.0, there is now an option to play Sudoku! Enter `PlaySudoku` after the module is installed.  
+The function can provide a hint, or solve the puzzle given its current state.
 
 
 ## Build Status - Main Branch

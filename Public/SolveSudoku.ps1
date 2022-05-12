@@ -26,7 +26,7 @@ Function SolveSudoku {
         $StopWatch = $null
     )
     if ($StopWatch) {
-        if($StopWatch.Elapsed.seconds -ge 10) {
+        if($StopWatch.Elapsed.seconds -ge 20) {
             return $false
         }
     }
