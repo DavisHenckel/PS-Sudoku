@@ -19,7 +19,12 @@ Function GetSudokuMove {
         [parameter(Mandatory=$true)]
         [System.Object]$OriginalGrid
     )
+    $Counter = 0
     while($true) {
+        $Counter++
+        if  ($Counter %3 -eq 0) {
+            PrintSudokuGridUI -SudokuGrid $SudokuGrid -OriginalGrid $OriginalGrid
+        }
         $Row, $Column, $NumToPlace = $null, $null, $null
         $Row = Read-Host -Prompt "Enter row placement(1-9)"
         if ($Row -eq '-hint' -or $Row -eq '-solve') {
