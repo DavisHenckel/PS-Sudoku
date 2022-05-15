@@ -21,7 +21,7 @@ jobs:
         id: psmodulecache
         uses: potatoqualitee/psmodulecache@v1
         with:
-          modules-to-cache: Pester, PSScriptAnalyzer, InvokeBuild, platyPS, PS-Sudoku
+          modules-to-cache: Pester, PSScriptAnalyzer, InvokeBuild, platyPS
       
       # Setup module cache
       - name: Setup PowerShell module cache
@@ -70,7 +70,7 @@ jobs:
         id: psmodulecache
         uses: potatoqualitee/psmodulecache@v1
         with:
-          modules-to-cache: Pester, PSScriptAnalyzer, InvokeBuild, platyPS, PS-Sudoku
+          modules-to-cache: Pester, PSScriptAnalyzer, InvokeBuild, platyPS
       
       # Setup module cache
       - name: Setup PowerShell module cache
@@ -120,7 +120,7 @@ jobs:
         id: psmodulecache
         uses: potatoqualitee/psmodulecache@v1
         with:
-          modules-to-cache: Pester, PSScriptAnalyzer, InvokeBuild, platyPS, PS-Sudoku
+          modules-to-cache: Pester, PSScriptAnalyzer, InvokeBuild, platyPS
       
       # Setup module cache
       - name: Setup PowerShell module cache
