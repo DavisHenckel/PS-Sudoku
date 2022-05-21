@@ -2,7 +2,7 @@
 external help file: PS-Sudoku-help.xml
 Module Name: PS-Sudoku
 online version:
-schema: 2.0.0
+schema: 2.0.1
 ---
 
 # IsSubgridPlacementValid

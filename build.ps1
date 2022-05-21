@@ -1,6 +1,6 @@
 param (
     [parameter(Mandatory=$true)]
-    [ValidateSet("ImportModules", "RunPSScriptAnalyzer", "RunUnitTests", "RunIntegrationTests", "RunAcceptanceTests", "PublishModule")]
+    [ValidateSet("ImportModules", "RunPSScriptAnalyzer", "RunUnitTests", "RunIntegrationTests", "RunAcceptanceTests", "PublishModule", "InstallPSSudoku")]
     [string]$FunctionToRun,
     [Parameter(Mandatory=$false)]
     [String]$NugetAPIKey
@@ -39,11 +39,44 @@ function ImportModules {
     }
 
     Write-Verbose -Message "Initializing PS-Sudoku"
-    if (-not(Get-Module -Name PS-Sudoku -ListAvailable)){
-        Write-Warning "Module 'PS-Sudoku' is missing or out of date. Installing module now."
-        Install-Module -Name "PS-Sudoku" -Scope CurrentUser -Force
-    }
+    InstallPSSudoku
     $WarningPreference = $null
+}
+
+function InstallPSSudoku {
+    # Script to install the module locally. 
+    # This is used prior to publishing the module to the PowerShell Gallery
+    $Version = "2.0.1"
+    $InstallPath = $null
+    if ($IsWindows) {
+        $InstallPath = "C:\Users\runneradmin\Documents\PowerShell\Modules\PS-Sudoku"
+    }
+    if ($IsLinux) {
+        $InstallPath = "/home/runner/.local/share/powershell/Modules/PS-Sudoku"
+    }
+    elseif ($IsMacOS) {
+        $InstallPath = "/Users/runner/.local/share/powershell/Modules/PS-Sudoku"
+    }
+    else {
+        $PossiblePaths = $env:PSModulePath.Split(";")
+        $InstallPath = $PossiblePaths[0]
+        $InstallPath = $InstallPath + "\PS-Sudoku"
+    }
+    if (Test-Path $InstallPath) {
+        Write-Verbose "Uninstalling pre-existing module versions..."
+        Remove-Item -Recurse -Force $InstallPath
+    }
+    Write-Verbose "Installing PS-Sudoku module version $Version`..."
+    New-Item -ItemType Directory "$InstallPath\$Version" | Out-Null
+    Copy-Item "$($PSScriptRoot)\*" -Exclude "*git*" -Recurse -Destination "$InstallPath\$Version"
+    Write-Verbose "Ensuring module is properly installed..." 
+    Import-Module PS-Sudoku -Force
+    if (-not (Get-Command -Module PS-Sudoku)){
+        Write-Verbose "Module not installed properly. Manually move the folder to $InstallPath`\`$Version"
+    }
+    else {
+        Write-Verbose "PS-Sudoku version $Version installed successfully!"
+    }
 }
 
 function PublishModule {
@@ -96,4 +129,3 @@ Function RunAcceptanceTests {
 }
 
 Invoke-Expression $FunctionToRun
-# Invoke-Expression $FunctionToRun

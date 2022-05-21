@@ -21,14 +21,16 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@main
+      - uses: actions/checkout@v3
+        with:
+          ref: development
 
       # Runs a single command using the runners shell
       - name: Define required powershell modules
         id: psmodulecache
         uses: potatoqualitee/psmodulecache@v1
         with:
-          modules-to-cache: Pester, PSScriptAnalyzer, InvokeBuild, platyPS, PS-Sudoku
+          modules-to-cache: Pester, PSScriptAnalyzer, InvokeBuild, platyPS
       
       #Add modules to the cache to speed up future deployments
       - name: Setup PowerShell module cache
@@ -73,14 +75,16 @@ jobs:
       # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@main
+      - uses: actions/checkout@v3
+        with:
+          ref: development
 
       # Runs a single command using the runners shell
       - name: Define required powershell modules
         id: psmodulecache
         uses: potatoqualitee/psmodulecache@v1
         with:
-          modules-to-cache: Pester, PSScriptAnalyzer, InvokeBuild, platyPS, PS-Sudoku
+          modules-to-cache: Pester, PSScriptAnalyzer, InvokeBuild, platyPS
       
       #Add modules to the cache to speed up future deployments
       - name: Setup PowerShell module cache
@@ -126,14 +130,16 @@ jobs:
       # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@main
+      - uses: actions/checkout@v3
+        with:
+          ref: development
 
       # Runs a single command using the runners shell
       - name: Define required powershell modules
         id: psmodulecache
         uses: potatoqualitee/psmodulecache@v1
         with:
-          modules-to-cache: Pester, PSScriptAnalyzer, InvokeBuild, platyPS, PS-Sudoku
+          modules-to-cache: Pester, PSScriptAnalyzer, InvokeBuild, platyPS
       
       #Add modules to the cache to speed up future deployments
       - name: Setup PowerShell module cache
