@@ -121,8 +121,9 @@ Function RunUnitTests {
     )
     $PesterArgs.Output.Verbosity = "Detailed"
     $PesterArgs.CodeCoverage.Enabled = $true
+    $PesterArgs.CodeCoverage.CoveragePercentTarget = 80
     $PesterArgs.CodeCoverage.ExcludeTests = $true
-    $PesterArgs.CodeCoverage.OutputPath = "SudokuCoverage.xml"
+    $PesterArgs.CodeCoverage.OutputPath = ".\Tests\UnitTests\CodeCoverage.xml"
     Write-Verbose -Message "Running Pester Unit Tests"
     $Results = Invoke-Pester -Configuration $PesterArgs
     if($Results.FailedCount -gt 0){
@@ -131,16 +132,54 @@ Function RunUnitTests {
 }
 
 Function RunIntegrationTests {
+    Import-Module .\PS-Sudoku.psm1
+    $container = New-PesterContainer -Path ".\Tests\IntegrationTests\*.ps1" -Data @{runDirectory = ".\Tests\IntegrationTests\"}
+    $PesterArgs = New-PesterConfiguration
+    $PesterArgs.Run.Container = $container
+    $PesterArgs.Run.PassThru = $true
+    $PesterArgs.CodeCoverage.Path = @(
+        '.\Private\FindValidSudokuGrid.ps1',
+        '.\Private\DeepCopyArray.ps1',
+        '.\Public\IsMoveValid.ps1',
+        '.\Public\SolveSudoku.ps1'
+    )
+    $PesterArgs.Output.Verbosity = "Detailed"
+    $PesterArgs.CodeCoverage.CoveragePercentTarget = 70
+    $PesterArgs.CodeCoverage.Enabled = $true
+    $PesterArgs.CodeCoverage.ExcludeTests = $true
+    $PesterArgs.CodeCoverage.OutputPath = ".\Tests\IntegrationTests\CodeCoverage.xml"
     Write-Verbose -Message "Running Pester Integration Tests"
-    $Results = Invoke-Pester -Script ".\Tests\IntegrationTests\*.ps1" -Output Detailed #-OutputFormat NUnitXml -OutputFile ".\Tests\IntegrationTestsResults.xml"
+    $Results = Invoke-Pester -Configuration $PesterArgs
     if($Results.FailedCount -gt 0){
         throw "$($Results.FailedCount) Tests failed"
     }
 }
 
 Function RunAcceptanceTests {
+    Import-Module .\PS-Sudoku.psm1
+    $container = New-PesterContainer -Path ".\Tests\AcceptanceTests\*.ps1" -Data @{runDirectory = ".\Tests\AcceptanceTests\"}
+    $PesterArgs = New-PesterConfiguration
+    $PesterArgs.Run.Container = $container
+    $PesterArgs.Run.PassThru = $true
+    $PesterArgs.CodeCoverage.Path = @(
+        '.\Private\FindValidSudokuGrid.ps1',
+        '.\Private\DeepCopyArray.ps1',
+        '.\Public\IsMoveValid.ps1',
+        '.\Public\SolveSudoku.ps1',
+        '.\Public\GenerateGrid.ps1',
+        '.\Public\IsSubgridPlacementValid.ps1',
+        '.\Public\IsRowPlacementValid.ps1',
+        '.\Public\FindEmptySpot.ps1',
+        '.\Private\RemoveRandomNumsFromGrid.ps1',
+        '.\Public\IsColumnPlacementValid.ps1'
+    )
+    $PesterArgs.Output.Verbosity = "Detailed"
+    $PesterArgs.CodeCoverage.CoveragePercentTarget = 60
+    $PesterArgs.CodeCoverage.Enabled = $true
+    $PesterArgs.CodeCoverage.ExcludeTests = $true
+    $PesterArgs.CodeCoverage.OutputPath = ".\Tests\AcceptanceTests\CodeCoverage.xml"
     Write-Verbose -Message "Running Pester Acceptance Tests"
-    $Results = Invoke-Pester -Script ".\Tests\AcceptanceTests\*.ps1" -Output Detailed #-OutputFormat NUnitXml -OutputFile ".\Tests\AcceptanceTestsResults.xml"
+    $Results = Invoke-Pester -Configuration $PesterArgs
     if($Results.FailedCount -gt 0){
         throw "$($Results.FailedCount) Tests failed"
     }
