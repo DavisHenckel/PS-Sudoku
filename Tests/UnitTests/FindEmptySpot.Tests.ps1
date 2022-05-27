@@ -12,7 +12,7 @@ Describe 'FindEmptySpot' {
         }
         $Ctr | should -be 81
     }
-    It 'Should find 45 empty spots on easy grid' {
+    It 'Should find 44 empty spots on easy grid' {
         $EasyGrid = GenerateGrid -Difficulty "Easy"
         $Ctr = 0
         $NextSpot = FindEmptySpot -SudokuGrid $EasyGrid
@@ -22,5 +22,16 @@ Describe 'FindEmptySpot' {
             $NextSpot = FindEmptySpot -SudokuGrid $EasyGrid
         }
         $Ctr | should -be 44
+    }
+    It 'Should find 64 spots on Unique Solution' {
+        $UniqueGrid = GenerateGrid -Difficulty UniqueSolution
+        $Ctr = 0
+        $NextSpot = FindEmptySpot -SudokuGrid $UniqueGrid
+        while ($NextSpot) {
+            $Ctr += 1
+            $UniqueGrid[$NextSpot.Item1 - 1][$NextSpot.Item2 - 1] = 1
+            $NextSpot = FindEmptySpot -SudokuGrid $UniqueGrid
+        }
+        $Ctr | should -be 64
     }
 }
