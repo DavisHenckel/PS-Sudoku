@@ -1,7 +1,7 @@
 # PS-Sudoku
 A recursive Sudoku solver written as a PowerShell module.
 
-## Current Version - 2.0.1
+## Current Version - 2.0.2
 Install from the [PowerShell Gallery](https://www.powershellgallery.com/packages/PS-Sudoku)!
 ```pwsh
 Install-Module -Name PS-Sudoku
@@ -23,7 +23,10 @@ SolveSudoku -SudokuGrid $SudokuBoard #add the -WatchAlgorithm switch to see the 
 # After the solver is complete, print the finished Sudoku board!
 PrintGrid -SudokuGrid $SudokuBoard
 ```
-
+## Code Coverage
+![CodeCoverageUT](https://badgen.net/badge/UnitTests/80.15%25/blue?)  
+![CodeCoverageIT](https://badgen.net/badge/IntegrationTests/72.22%25/blue?)  
+![CodeCoverageAT](https://badgen.net/badge/AcceptanceTests/69.82%25/blue?)
 
 ## Build Status - Main Branch
 | CI System | Environment | Job Name & Status |
