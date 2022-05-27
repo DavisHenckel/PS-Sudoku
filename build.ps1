@@ -46,7 +46,7 @@ function ImportModules {
 function InstallPSSudoku {
     # Script to install the module locally. 
     # This is used prior to publishing the module to the PowerShell Gallery
-    $Version = "2.0.1"
+    $Version = "2.0.2"
     $InstallPath = $null
     if ($IsWindows) {
         $InstallPath = "C:\Users\runneradmin\Documents\PowerShell\Modules\PS-Sudoku"

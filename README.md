@@ -1,7 +1,7 @@
 # PS-Sudoku
 A recursive Sudoku solver written as a PowerShell module.
 
-## Current Version - 2.0.1
+## Current Version - 2.0.2
 Install from the [PowerShell Gallery](https://www.powershellgallery.com/packages/PS-Sudoku)!
 ```pwsh
 Install-Module -Name PS-Sudoku
