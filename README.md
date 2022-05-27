@@ -23,7 +23,10 @@ SolveSudoku -SudokuGrid $SudokuBoard #add the -WatchAlgorithm switch to see the 
 # After the solver is complete, print the finished Sudoku board!
 PrintGrid -SudokuGrid $SudokuBoard
 ```
-
+## Code Coverage
+![CodeCoverage](https://badgen.net/badge/UnitTests/80.15\%/blue?)  
+![CodeCoverage](https://badgen.net/badge/IntegrationTests/72.22\%/blue?)  
+![CodeCoverage](https://badgen.net/badge/AcceptanceTests/69.82\%/blue?)
 
 ## Build Status - Main Branch
 | CI System | Environment | Job Name & Status |
