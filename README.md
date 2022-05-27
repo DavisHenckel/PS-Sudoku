@@ -24,9 +24,9 @@ SolveSudoku -SudokuGrid $SudokuBoard #add the -WatchAlgorithm switch to see the 
 PrintGrid -SudokuGrid $SudokuBoard
 ```
 ## Code Coverage
-![CodeCoverageUT](https://badgen.net/badge/UnitTests/80.15\%/blue?)  
-![CodeCoverageIT](https://badgen.net/badge/IntegrationTests/72.22\%/blue?)  
-![CodeCoverageAT](https://badgen.net/badge/AcceptanceTests/69.82\%/blue?)
+![CodeCoverageUT](https://badgen.net/badge/UnitTests/80.15%25/blue?)  
+![CodeCoverageIT](https://badgen.net/badge/IntegrationTests/72.22%25/blue?)  
+![CodeCoverageAT](https://badgen.net/badge/AcceptanceTests/69.82%25/blue?)
 
 ## Build Status - Main Branch
 | CI System | Environment | Job Name & Status |
