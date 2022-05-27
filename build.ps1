@@ -105,8 +105,26 @@ function RunPSScriptAnalyzer {
 }
 
 Function RunUnitTests {
+    Import-Module .\PS-Sudoku.psm1
+    $container = New-PesterContainer -Path ".\Tests\UnitTests\*.ps1" -Data @{runDirectory = ".\Tests\UnitTests\"}
+    $PesterArgs = New-PesterConfiguration
+    $PesterArgs.Run.Container = $container
+    $PesterArgs.Run.PassThru = $true
+    $PesterArgs.CodeCoverage.Path = @(
+        '.\Public\FindEmptySpot.ps1',
+        '.\Public\GenerateGrid.ps1',
+        '.\Public\IsMoveValid.ps1',
+        '.\Public\SolveSudoku.ps1',
+        '.\Public\IsSubgridPlacementValid.ps1',
+        '.\Public\IsRowPlacementValid.ps1',
+        '.\Private\RemoveRandomNumsFromGrid.ps1'
+    )
+    $PesterArgs.Output.Verbosity = "Detailed"
+    $PesterArgs.CodeCoverage.Enabled = $true
+    $PesterArgs.CodeCoverage.ExcludeTests = $true
+    $PesterArgs.CodeCoverage.OutputPath = "SudokuCoverage.xml"
     Write-Verbose -Message "Running Pester Unit Tests"
-    $Results = Invoke-Pester -Script ".\Tests\UnitTests\*.ps1" -Output Detailed #-OutputFormat NUnitXml -OutputFile ".\Tests\UnitTests\UnitTestsResults.xml"
+    $Results = Invoke-Pester -Configuration $PesterArgs
     if($Results.FailedCount -gt 0){
         throw "$($Results.FailedCount) Tests failed"
     }
