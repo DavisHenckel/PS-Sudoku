@@ -4,7 +4,7 @@ Describe 'FindEmptySpot' {
         $Ctr = 0
         For ($i = 0; $i -lt 9; $i++) {
             For ($j = 0; $j -lt 9; $j++) {
-                if (FindEmptySpot -SudokuGrid $EmptyGrid) {
+                If (FindEmptySpot -SudokuGrid $EmptyGrid) {
                     $EmptyGrid[$i][$j] = 1
                     $Ctr += 1
                 }
@@ -16,7 +16,7 @@ Describe 'FindEmptySpot' {
         $EasyGrid = GenerateGrid -Difficulty "Easy"
         $Ctr = 0
         $NextSpot = FindEmptySpot -SudokuGrid $EasyGrid
-        while ($NextSpot) {
+        While ($NextSpot) {
             $Ctr += 1
             $EasyGrid[$NextSpot.Item1 - 1][$NextSpot.Item2 - 1] = 1
             $NextSpot = FindEmptySpot -SudokuGrid $EasyGrid
@@ -27,7 +27,7 @@ Describe 'FindEmptySpot' {
         $UniqueGrid = GenerateGrid -Difficulty UniqueSolution
         $Ctr = 0
         $NextSpot = FindEmptySpot -SudokuGrid $UniqueGrid
-        while ($NextSpot) {
+        While ($NextSpot) {
             $Ctr += 1
             $UniqueGrid[$NextSpot.Item1 - 1][$NextSpot.Item2 - 1] = 1
             $NextSpot = FindEmptySpot -SudokuGrid $UniqueGrid
