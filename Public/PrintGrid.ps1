@@ -13,7 +13,7 @@
     Does not return anything. Simply outputs the Sudoku Board to the console
 #>
 Function PrintGrid {
-    param (
+    Param (
         [parameter(Mandatory=$true,ValueFromPipeline=$false)]
         [System.Object]$SudokuGrid
     )
@@ -21,7 +21,7 @@ Function PrintGrid {
     $RowIterator = 1
     $OutputString = "+++++++++++++++++++++++++`n"
     ForEach ($Element in $SudokuGrid) {
-        if ($RowIterator % 4 -eq 0) {
+        If ($RowIterator % 4 -eq 0) {
             $OutputString += "|-------+-------+------ |`n" 
             $RowIterator = 1
         }
@@ -29,12 +29,12 @@ Function PrintGrid {
         $RowIterator += 1
         ForEach ($Item in $Element) {
             $OutputString += "$Item "
-            if ($Iterator -eq 9) {
+            If ($Iterator -eq 9) {
                 $OutputString += "|`n"
                 $Iterator = 1
-                continue
+                Continue
             }
-            if ($Iterator % 3 -eq 0) {
+            If ($Iterator % 3 -eq 0) {
                 $OutputString += "| "
             }
             $Iterator += 1
