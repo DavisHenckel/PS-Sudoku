@@ -17,7 +17,7 @@
     Returns a boolean
 #>
 Function IsRowPlacementValid {
-    param (
+    Param (
         [parameter(Mandatory=$true)]
         [System.Object]$SudokuGrid,
         [parameter(Mandatory=$true)]
