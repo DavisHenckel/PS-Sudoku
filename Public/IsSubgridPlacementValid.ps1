@@ -19,7 +19,7 @@
     Returns a boolean
 #>
 Function IsSubgridPlacementValid {
-    param (
+    Param (
         [parameter(Mandatory=$true)]
         [System.Object]$SudokuGrid,
         [parameter(Mandatory=$true)]
@@ -36,12 +36,12 @@ Function IsSubgridPlacementValid {
     $CalcCol = $Column - 1 
     [int32]$SubgridRowStart = [Math]::Floor(($CalcRow / 3)) * 3 
     [int32]$SubgridColumnStart = [Math]::Floor(($CalcCol / 3)) * 3
-    for ($i = $SubgridRowStart; $i -lt $SubgridRowStart + 3; $i++) {
-        for ($j = $SubgridColumnStart; $j -lt $SubgridColumnStart + 3; $j++) {
-            if ([int32]$SudokuGrid[($i)][($j)] -eq $Number) {
-                return $false
+    For ($i = $SubgridRowStart; $i -lt $SubgridRowStart + 3; $i++) {
+        For ($j = $SubgridColumnStart; $j -lt $SubgridColumnStart + 3; $j++) {
+            If (($SudokuGrid[($i)][($j)] -eq $Number) -or ($SudokuGrid[($i)][($j)] -eq [string]$Number)) {
+                Return $false
             }
         }
     }
-    return $true
+    Return $true
 }
