@@ -21,5 +21,5 @@ Function DeepCopyArray ($Source) {
     $reader.Position = 0
     $Dest = $Bytes.Deserialize($reader)
     $reader.Close()
-    return $Dest
+    Return $Dest
 }
