@@ -13,17 +13,17 @@
     Returns a tuple that contains the row and column of the empty spot. If there is no empty spot available, returns $null
 #>
 Function FindEmptySpot {
-    param(
+    Param(
         [parameter(Mandatory=$true)]
         [System.Object]$SudokuGrid
     )
     
-    for ($i = 0; $i -lt 9; $i++) {
-        for($j = 0; $j -lt 9; $j++) {
-            if ($SudokuGrid[$i][$j] -notmatch '\d') {
-                return [System.Tuple]::Create(($i+1),($j+1))
+    For ($i = 0; $i -lt 9; $i++) {
+        For($j = 0; $j -lt 9; $j++) {
+            If ($SudokuGrid[$i][$j] -notmatch '\d') {
+                Return [System.Tuple]::Create(($i+1),($j+1))
             }
         }
     }
-    return $null
+    Return $null
 }
