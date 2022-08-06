@@ -13,26 +13,26 @@
     Returns a 2d Tuple, with [0] being the number to place and [1] being the row, column to place at.
 #>
 Function GetSudokuMove {
-    param(
+    Param(
         [parameter(Mandatory=$true)]
         [System.Object]$SudokuGrid,
         [parameter(Mandatory=$true)]
         [System.Object]$OriginalGrid
     )
     $Counter = 0
-    while($true) {
+    While($true) {
         $Counter++
-        if  ($Counter %3 -eq 0) {
+        If  ($Counter %3 -eq 0) {
             PrintSudokuGridUI -SudokuGrid $SudokuGrid -OriginalGrid $OriginalGrid
         }
         $Row, $Column, $NumToPlace = $null, $null, $null
         $Row = Read-Host -Prompt "Enter row placement(1-9)"
-        if ($Row -eq '-hint' -or $Row -eq '-solve') {
-            return $Row
+        If ($Row -eq '-hint' -or $Row -eq '-solve') {
+            Return $Row
         }
         $Column = Read-Host -Prompt "Enter column placement(1-9)"
-        if ($Column -eq '-hint' -or $Column -eq '-solve') {
-            return $Column
+        If ($Column -eq '-hint' -or $Column -eq '-solve') {
+            Return $Column
         }
         $NumToPlace = Read-Host -Prompt "Enter the number to place (1-9)" 
         if ($NumToPlace -eq '-hint' -or $NumToPlace -eq '-solve') {
