@@ -35,8 +35,8 @@ Function GetSudokuMove {
             Return $Column
         }
         $NumToPlace = Read-Host -Prompt "Enter the number to place (1-9)" 
-        if ($NumToPlace -eq '-hint' -or $NumToPlace -eq '-solve') {
-            return $NumToPlace
+        If ($NumToPlace -eq '-hint' -or $NumToPlace -eq '-solve') {
+            Return $NumToPlace
         }
         Try {
             $Row, $Column, $NumToPlace = [int32]$Row, [int32]$Column, [int32]$NumToPlace
@@ -44,13 +44,13 @@ Function GetSudokuMove {
         Catch {
             Write-Error "Row, Column, and Number must be a number between 1-9, '-hint', or '-solve'"
         }
-        if ($OriginalGrid[$Row-1][$Column-1] -ne '-') {
+        If ($OriginalGrid[$Row-1][$Column-1] -ne '-') {
             Write-Error "You cannot modify this number as it is part of the original board."
-            continue
+            Continue
         }
-        if (($Row -lt 10 -and $Row -gt 0) -and ($Column -lt 10 -and $Column -gt 0) -and ($NumToPlace -lt 10 -and $NumToPlace -gt 0) ) {
+        If (($Row -lt 10 -and $Row -gt 0) -and ($Column -lt 10 -and $Column -gt 0) -and ($NumToPlace -lt 10 -and $NumToPlace -gt 0) ) {
             $Placement = [System.Tuple]::Create($Row, $Column)
-            return @($NumToPlace, $Placement)
+            Return @($NumToPlace, $Placement)
         }
         Write-Error "Row, Column, and Number must be between 1-9 (inclusive)"
     }  
