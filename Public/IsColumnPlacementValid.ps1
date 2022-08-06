@@ -28,7 +28,7 @@ Function IsColumnPlacementValid {
         [int32]$Number
     )
     ForEach ($Row in $SudokuGrid) {
-        if ([int32]$Row[$Column - 1] -eq $Number) {
+        if (($Row[$Column - 1] -eq $Number) -or ($Row[$Column - 1] -eq [string]$Number)) {
             return $false
         }
     }
