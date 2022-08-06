@@ -38,7 +38,7 @@ Function IsSubgridPlacementValid {
     [int32]$SubgridColumnStart = [Math]::Floor(($CalcCol / 3)) * 3
     for ($i = $SubgridRowStart; $i -lt $SubgridRowStart + 3; $i++) {
         for ($j = $SubgridColumnStart; $j -lt $SubgridColumnStart + 3; $j++) {
-            if ($SudokuGrid[($i)][($j)] -eq $Number) {
+            if ([int32]$SudokuGrid[($i)][($j)] -eq $Number) {
                 return $false
             }
         }
