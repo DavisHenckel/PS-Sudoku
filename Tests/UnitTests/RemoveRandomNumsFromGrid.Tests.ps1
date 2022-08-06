@@ -12,7 +12,7 @@ Describe "RemoveRandomNumsFromGrid" {
             $ct = 0
             ForEach ($Row in $Grid) {
                 ForEach ($Num in $Row) {
-                    if ($Num -gt 0) {
+                    If ($Num -gt 0) {
                         $ct += 1
                     }
                 }   
