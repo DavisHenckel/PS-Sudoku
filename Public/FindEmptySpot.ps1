@@ -20,7 +20,7 @@ Function FindEmptySpot {
     
     for ($i = 0; $i -lt 9; $i++) {
         for($j = 0; $j -lt 9; $j++) {
-            if ($SudokuGrid[$i][$j] -eq '-') {
+            if ($SudokuGrid[$i][$j] -notmatch '\d') {
                 return [System.Tuple]::Create(($i+1),($j+1))
             }
         }
