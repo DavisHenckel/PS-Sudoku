@@ -28,10 +28,10 @@ Function IsRowPlacementValid {
         [int32]$Number
     )
     $SelectedRow = $SudokuGrid[$Row - 1]
-    if (($SelectedRow.Contains($Number)) -or ($SelectedRow.Contains([string]$Number))) {
-        return $false
+    If (($SelectedRow.Contains($Number)) -or ($SelectedRow.Contains([string]$Number))) {
+        Return $false
     }
-    else {
-        return $true
+    Else {
+        Return $true
     }
 }
