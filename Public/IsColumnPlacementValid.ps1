@@ -17,7 +17,7 @@
     Returns a boolean
 #>
 Function IsColumnPlacementValid {
-    param (
+    Param (
         [parameter(Mandatory=$true)]
         [System.Object]$SudokuGrid,
         [parameter(Mandatory=$true)]
@@ -28,9 +28,9 @@ Function IsColumnPlacementValid {
         [int32]$Number
     )
     ForEach ($Row in $SudokuGrid) {
-        if (($Row[$Column - 1] -eq $Number) -or ($Row[$Column - 1] -eq [string]$Number)) {
-            return $false
+        If (($Row[$Column - 1] -eq $Number) -or ($Row[$Column - 1] -eq [string]$Number)) {
+            Return $false
         }
     }
-    return $true
+    Return $true
 }
