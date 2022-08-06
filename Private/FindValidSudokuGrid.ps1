@@ -20,13 +20,13 @@
     Returns a randomly generated solvable Sudoku board with only the number of clues filled out.
 #>
 Function FindValidSudokuGrid {
-    param(
+    Param(
         [parameter(Mandatory=$true)]
         [System.Object]$Grid,
         [parameter(Mandatory=$true)]
         [System.Object]$NumClues
     )
-    while ($true) {
+    While ($true) {
         $ReturnGrid = DeepCopyArray $Grid
         #Iterate num clues 10 times. Each iteration, picking a random cell, and setting it to a random value.
         For($i = 0; $i -lt 10; $i++) {
@@ -34,7 +34,7 @@ Function FindValidSudokuGrid {
             [int32]$RowToTry = Get-Random -Minimum 0 -Maximum 8
             [int32]$ColToTry = Get-Random -Minimum 0 -Maximum 8
             #Make sure move is valid and is not in use already
-            if ((IsMoveValid -SudokuGrid $Grid -Row ($RowToTry+1) -Col ($ColToTry+1) -Number $NumToTry) -and ($Grid[$RowToTry][$ColToTry] -eq '-')) {
+            If ((IsMoveValid -SudokuGrid $Grid -Row ($RowToTry+1) -Col ($ColToTry+1) -Number $NumToTry) -and ($Grid[$RowToTry][$ColToTry] -eq '-')) {
                 $Grid[$RowToTry][$ColToTry] = $NumToTry #assign the number to the grid
                 $ReturnGrid[$RowToTry][$ColToTry] = $NumToTry #update the return grid
                 $Grid = DeepCopyArray $ReturnGrid #re-copy the current state of the return grid to the grid
@@ -43,8 +43,8 @@ Function FindValidSudokuGrid {
         # Stopwatch to track the length of time. I don't want grid generation to take too long.
         $stopwatch =  [system.diagnostics.stopwatch]::StartNew()
         #If this grid has a valid solution return the grid
-        if (SolveSudoku -SudokuGrid $Grid -StopWatch $stopwatch) {
-            return (RemoveRandomNumsFromGrid -SolvedGrid $Grid -NumClues $NumClues)
+        If (SolveSudoku -SudokuGrid $Grid -StopWatch $stopwatch) {
+            Return (RemoveRandomNumsFromGrid -SolvedGrid $Grid -NumClues $NumClues)
         }
         #otherwise retry the process
         else {
