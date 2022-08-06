@@ -17,7 +17,7 @@
     Outputs a boolean value indicating whether the Sudoku grid is solved or not.
 #>
 Function SolveSudoku {
-    param (
+    Param (
         [parameter(Mandatory=$true)]
         [System.Object]$SudokuGrid,
         [parameter(Mandatory=$false)]
@@ -25,51 +25,51 @@ Function SolveSudoku {
         [parameter(Mandatory=$false)]
         $StopWatch = $null
     )
-    if ($StopWatch) {
-        if($StopWatch.Elapsed.seconds -ge 20) {
-            return $false
+    If ($StopWatch) {
+        If($StopWatch.Elapsed.seconds -ge 20) {
+            Return $false
         }
     }
-    if ($WatchAlgorithm) {
+    If ($WatchAlgorithm) {
         $EmptyMove = FindEmptySpot -SudokuGrid $SudokuGrid
-        if (-not $EmptyMove) {
-            return $true #puzzle is solved   
+        If (-not $EmptyMove) {
+            Return $true #puzzle is solved   
         }
         $Row = $EmptyMove.Item1
         $Column = $EmptyMove.Item2
         For ($i = 1; $i -lt 10; $i++) {
-            if (IsMoveValid -SudokuGrid $SudokuGrid -Row $Row -Column $Column -Number $i) {
+            If (IsMoveValid -SudokuGrid $SudokuGrid -Row $Row -Column $Column -Number $i) {
                 $SudokuGrid[$Row-1][$Column-1] = $i
                 Write-Host ("Placing $i at $Row, $Column")
                 Write-Host (PrintGrid -SudokuGrid $SudokuGrid)
                 Start-Sleep 0.1
-                if (SolveSudoku -SudokuGrid $SudokuGrid -WatchAlgorithm -StopWatch $StopWatch) { #attempt to solve the rest of the puzzle with the new number
-                    return $true
+                If (SolveSudoku -SudokuGrid $SudokuGrid -WatchAlgorithm -StopWatch $StopWatch) { #attempt to solve the rest of the puzzle with the new number
+                    Return $true
                 }
                 Write-Host "Backtracking..."
             }
             #if the number can't be placed because there is no solution on future calls, remove it from the grid
             $SudokuGrid[$Row-1][$Column-1] = '-'
         }
-        return $false #puzzle can't be solved
+        Return $false #puzzle can't be solved
     }
-    else {
+    Else {
         $EmptyMove = FindEmptySpot -SudokuGrid $SudokuGrid
-        if (-not $EmptyMove) {
-            return $true #puzzle is solved
+        If (-not $EmptyMove) {
+            Return $true #puzzle is solved
         }
         $Row = $EmptyMove.Item1
         $Column = $EmptyMove.Item2
         For ($i = 1; $i -lt 10; $i++) {
-            if (IsMoveValid -SudokuGrid $SudokuGrid -Row $Row -Column $Column -Number $i) {
+            If (IsMoveValid -SudokuGrid $SudokuGrid -Row $Row -Column $Column -Number $i) {
                 $SudokuGrid[$Row-1][$Column-1] = $i
-                if (SolveSudoku -SudokuGrid $SudokuGrid -StopWatch $StopWatch) { #attempt to solve the rest of the puzzle with the new number
-                    return $true
+                If (SolveSudoku -SudokuGrid $SudokuGrid -StopWatch $StopWatch) { #attempt to solve the rest of the puzzle with the new number
+                    Return $true
                 }
             }
             #if the number can't be placed because there is no solution on future calls, remove it from the grid
             $SudokuGrid[$Row-1][$Column-1] = '-'
         }
-        return $false #puzzle can't be solved
+        Return $false #puzzle can't be solved
     }
 }
