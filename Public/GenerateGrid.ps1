@@ -30,13 +30,13 @@ $DIFFICULTYCLUES = @{
     Returns a 2D array that is the Sudoku Board. 
 #>
 Function GenerateGrid {
-    param(
+    Param(
         [parameter(Mandatory=$false)]
         [ValidateSet("Empty", "Easy", "Medium", "Hard", "Expert", "Insane", "Filled", "UniqueSolution")]
         [String]$Difficulty = "Empty"
     )
-    if ($Difficulty -eq "Filled") {
-        return [System.Array]@(
+    If ($Difficulty -eq "Filled") {
+        Return [System.Array]@(
             [System.Array]@(1,1,1,1,1,1,1,1,1),
             [System.Array]@(1,1,1,1,1,1,1,1,1),
             [System.Array]@(1,1,1,1,1,1,1,1,1),
@@ -59,8 +59,8 @@ Function GenerateGrid {
         [System.Array]@('-','-','-','-','-','-','-','-','-'),
         [System.Array]@('-','-','-','-','-','-','-','-','-')
     )
-    if ($Difficulty -eq "UniqueSolution") {
-        return [System.Array]@(
+    If ($Difficulty -eq "UniqueSolution") {
+        Return [System.Array]@(
             [System.Array]@('-','-','-',8,'-',1,'-','-','-'),
             [System.Array]@('-','-','-','-','-','-','-',4,3),
             [System.Array]@(5,'-','-','-','-','-','-','-','-'),
@@ -72,8 +72,8 @@ Function GenerateGrid {
             [System.Array]@('-','-','-',2,'-','-',6,'-','-')
         )
     }
-    if ($Difficulty -eq "Empty") {
-        return $StarterArr
+    If ($Difficulty -eq "Empty") {
+        Return $StarterArr
     }
-    return FindValidSudokuGrid -Grid $StarterArr -NumClues $DIFFICULTYCLUES.$Difficulty
+    Return FindValidSudokuGrid -Grid $StarterArr -NumClues $DIFFICULTYCLUES.$Difficulty
 }
