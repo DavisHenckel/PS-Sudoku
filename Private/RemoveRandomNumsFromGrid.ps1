@@ -16,7 +16,7 @@
     Returns a Sudoku grid with the specified number of clues remaining
 #>
 Function RemoveRandomNumsFromGrid {
-    param(
+    Param(
         [parameter(Mandatory=$true)]
         [System.Object]$SolvedGrid,
         [parameter(Mandatory=$true)]
@@ -24,21 +24,21 @@ Function RemoveRandomNumsFromGrid {
     )
     $ReturnGrid = DeepCopyArray $SolvedGrid
     $RemovedNumbers = 0
-    while ($RemovedNumbers -lt 81-$NumClues) {
+    While ($RemovedNumbers -lt 81-$NumClues) {
         $Ctr = 0
         $LocToRemove = Get-Random -Minimum 0 -Maximum 80
-        :middleloop for ($j = 0; $j -lt 9; $j++) {
-            for ($k = 0; $k -lt 9; $k++) {
-                if ($LocToRemove -eq $Ctr) {
-                    if ($ReturnGrid[$j][$k] -ne '-') {
+        :middleloop For ($j = 0; $j -lt 9; $j++) {
+            For ($k = 0; $k -lt 9; $k++) {
+                If ($LocToRemove -eq $Ctr) {
+                    If ($ReturnGrid[$j][$k] -ne '-') {
                         $ReturnGrid[$j][$k] = '-' #erase the number
                         $RemovedNumbers += 1
                     }
-                    break middleloop #break out of the inner loop since we found the location. Move onto the next number
+                    Break middleloop #break out of the inner loop since we found the location. Move onto the next number
                 }
                 $Ctr++
             }
         }
     }
-    return $ReturnGrid
+    Return $ReturnGrid
 }
