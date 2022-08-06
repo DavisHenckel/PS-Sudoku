@@ -13,7 +13,7 @@
     Returns a boolean indicating if the move is valid.
 #>
 Function ValidateSudokuMove {
-    param(
+    Param(
         [parameter(Mandatory=$true)]
         [System.Object]$SudokuGrid,
         [parameter(Mandatory=$true)]
@@ -24,28 +24,28 @@ Function ValidateSudokuMove {
     $ColValid = IsColumnPlacementValid -SudokuGrid $SudokuGrid -Column $Column -Number $NumToPlace
     $SubgridValid = IsSubgridPlacementValid -SudokuGrid $SudokuGrid -Row $Row -Column $Column -Number $NumToPlace
     Write-Host "Row Placement: " -ForegroundColor Yellow -NoNewline
-    if ($RowValid) {
+    If ($RowValid) {
         Write-Host "Valid!" -ForegroundColor Green
     }
-    else {
+    Else {
         Write-Host "Invalid!" -ForegroundColor Red
     }
     Write-Host "Column Placement: " -ForegroundColor Yellow  -NoNewline
-    if ($ColValid) {
+    If ($ColValid) {
         Write-Host "Valid!" -ForegroundColor Green
     }
-    else {
+    Else {
         Write-Host "Invalid!" -ForegroundColor Red
     }
     Write-Host "Subgrid Placement: " -ForegroundColor Yellow  -NoNewline
-    if ($SubgridValid) {
+    If ($SubgridValid) {
         Write-Host "Valid!" -ForegroundColor Green
     }
-    else {
+    Else {
         Write-Host "Invalid!" -ForegroundColor Red
     }
-    if ($RowValid -and $ColValid -and $SubgridValid) {
-        return $true
+    If ($RowValid -and $ColValid -and $SubgridValid) {
+        Return $true
     }
-    return $false
+    Return $false
 }
