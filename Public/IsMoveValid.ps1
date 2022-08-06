@@ -19,7 +19,7 @@
     Returns a boolean value indicating if the move is valid
 #>
 Function IsMoveValid {
-    param (
+    Param (
         [parameter(Mandatory=$true)]
         [System.Object]$SudokuGrid,
         [parameter(Mandatory=$true)]
@@ -32,12 +32,12 @@ Function IsMoveValid {
         [ValidateRange(1,9)]
         [int32]$Number
     )
-    if (IsRowPlacementValid -SudokuGrid $SudokuGrid -Row $Row -Number $Number) {
-        if (IsColumnPlacementValid -SudokuGrid $SudokuGrid -Column $Column -Number $Number) {
-            if (IsSubGridPlacementValid -SudokuGrid $SudokuGrid -Row $Row -Column $Column -Number $Number) {
-                return $true
+    If (IsRowPlacementValid -SudokuGrid $SudokuGrid -Row $Row -Number $Number) {
+        If (IsColumnPlacementValid -SudokuGrid $SudokuGrid -Column $Column -Number $Number) {
+            If (IsSubGridPlacementValid -SudokuGrid $SudokuGrid -Row $Row -Column $Column -Number $Number) {
+                Return $true
             }
         }
     }
-    return $false
+    Return $false
 }
