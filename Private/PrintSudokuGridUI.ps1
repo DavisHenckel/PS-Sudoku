@@ -1,5 +1,5 @@
-function PrintSudokuGridUI {
-    param (
+Function PrintSudokuGridUI {
+    Param (
         [parameter(Mandatory=$true)]
         [System.Object]$OriginalGrid,
         [parameter(Mandatory=$true)]
@@ -7,27 +7,27 @@ function PrintSudokuGridUI {
     )
     Write-Host "+++++++++++++++++++++++++"
     For($Row = 1; $Row -lt 10; $Row++) {
-        if ($Row -eq 4 -or $Row -eq 7) {
+        If ($Row -eq 4 -or $Row -eq 7) {
             Write-Host "|-------+-------+------ |" 
         }
         For($Col = 1; $Col -lt 10; $Col++) {
-            if ($Col -eq 1) {
+            If ($Col -eq 1) {
                 Write-Host "| " -NoNewline
             }
             $CurrentItem = $SudokuGrid[$Row-1][$Col-1]
-            if ($OriginalGrid[$Row-1][$Col-1] -ne '-') {
+            If ($OriginalGrid[$Row-1][$Col-1] -ne '-') {
                 Write-Host -ForegroundColor Green -NoNewline "$CurrentItem "
             }
-            elseif ($CurrentItem -ne '-') {
+            ElseIf ($CurrentItem -ne '-') {
                 Write-Host -ForegroundColor Yellow -NoNewline "$CurrentItem "
             }
-            else {
+            Else {
                 Write-Host -NoNewline "$CurrentItem "
             }
-            if ($Col % 3 -eq 0 -and $Col -ne 9) {
+            If ($Col % 3 -eq 0 -and $Col -ne 9) {
                 Write-Host "| " -NoNewline
             }
-            elseif($Col -eq 9) {
+            ElseIf($Col -eq 9) {
                 Write-Host "|" 
             }
         }   
