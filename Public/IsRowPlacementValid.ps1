@@ -28,7 +28,7 @@ Function IsRowPlacementValid {
         [int32]$Number
     )
     $SelectedRow = $SudokuGrid[$Row - 1]
-    if ($SelectedRow.Contains($Number)) {
+    if (($SelectedRow.Contains($Number)) -or ($SelectedRow.Contains([string]$Number))) {
         return $false
     }
     else {
