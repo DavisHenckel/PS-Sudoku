@@ -47,10 +47,10 @@ Function FindValidSudokuGrid {
             Return (RemoveRandomNumsFromGrid -SolvedGrid $Grid -NumClues $NumClues)
         }
         #otherwise retry the process
-        else {
+        Else {
             $Grid = GenerateGrid -Difficulty "Empty"
             $ReturnGrid = DeepCopyArray $Grid
-            continue
+            Continue
         }
     }
 }
