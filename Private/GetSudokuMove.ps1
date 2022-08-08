@@ -44,7 +44,7 @@ Function GetSudokuMove {
         Catch {
             Write-Error "Row, Column, and Number must be a number between 1-9, '-hint', or '-solve'"
         }
-        if ($OriginalGrid[$Row-1][$Column-1] -ne '-') {
+        if ($OriginalGrid[$Row-1][$Column-1] -match '[1-9]') {
             Write-Error "You cannot modify this number as it is part of the original board."
             continue
         }

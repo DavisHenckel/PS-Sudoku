@@ -34,7 +34,7 @@ Function FindValidSudokuGrid {
             [int32]$RowToTry = Get-Random -Minimum 0 -Maximum 8
             [int32]$ColToTry = Get-Random -Minimum 0 -Maximum 8
             #Make sure move is valid and is not in use already
-            if ((IsMoveValid -SudokuGrid $Grid -Row ($RowToTry+1) -Col ($ColToTry+1) -Number $NumToTry) -and ($Grid[$RowToTry][$ColToTry] -eq '-')) {
+            if ((IsMoveValid -SudokuGrid $Grid -Row ($RowToTry+1) -Col ($ColToTry+1) -Number $NumToTry) -and ($Grid[$RowToTry][$ColToTry] -match '[^1-9]')) {
                 $Grid[$RowToTry][$ColToTry] = $NumToTry #assign the number to the grid
                 $ReturnGrid[$RowToTry][$ColToTry] = $NumToTry #update the return grid
                 $Grid = DeepCopyArray $ReturnGrid #re-copy the current state of the return grid to the grid
