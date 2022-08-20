@@ -30,7 +30,7 @@ Function RemoveRandomNumsFromGrid {
         :middleloop for ($j = 0; $j -lt 9; $j++) {
             for ($k = 0; $k -lt 9; $k++) {
                 if ($LocToRemove -eq $Ctr) {
-                    if ($ReturnGrid[$j][$k] -ne '-') {
+                    if ($ReturnGrid[$j][$k] -match '[1-9]') {
                         $ReturnGrid[$j][$k] = '-' #erase the number
                         $RemovedNumbers += 1
                     }
